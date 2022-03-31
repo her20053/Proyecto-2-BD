@@ -1,0 +1,622 @@
+body {
+  margin:0;
+  padding: 0;
+  font-family: sans-serif;
+  
+}
+
+/* seccion de los divs de las paginas */
+.Register, .Login{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background:
+    radial-gradient(transparent, black),
+    url('wp.jpg');
+  background-size: cover;
+}
+
+.ErrorPage, .Profile, .Planes, .AddProfile {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background: #131416;
+}
+
+.Home {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 200vh;
+  background: #131416;
+}
+
+/* css de perfiles */
+
+h4 { 
+  position: relative;
+  top: -10px;
+  color: white;
+  text-align: center;
+}
+
+#quien {
+  position: relative;
+  color: white;
+  font-size: 70px;
+  font-weight: 100;
+  top: 3%;
+  text-align: center;
+}
+
+  .gridPerfiles {
+    padding: 50px 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    grid-template-rows:    repeat(2, 200px);
+    grid-template-columns: repeat(4, 200px);
+    grid-gap: 2.5rem;
+  }
+
+  #agregarPerfil {
+    width: 190px;
+    height: 190px;
+    border-radius: 5px;
+  }
+
+
+.perfil {
+    background: #ffba08;
+    width: 180px;
+    height: 180px;
+    border-radius: 5px;
+    border: 4px solid #ffba08;
+  }
+
+  #agregarPerfil:hover { 
+    background: gray;
+  }
+
+  .perfil:hover {
+    border: 4px solid white;
+  }
+
+.Manejar {
+  padding: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#btnmanejar{
+  position: relative;
+  width: 246px;
+  top: 0px;
+  border: 0;
+  background: #131416;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  border: 1px solid #828a94;
+  padding: 14px 10px;
+  outline: none;
+  color: #828a94;
+  border-radius: 1px;
+  transition: 0.25px;
+  cursor: pointer;
+}
+
+/*css agregarPerfil*/
+.AddProfile { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contAgregarPerfiles { 
+  position: relative;
+  top: 10%;
+  width: 850px;
+  text-align: left;
+}
+
+#tituloAPerfil {
+  color: white;
+  font-size: 60px;
+  font-weight: 100;
+  top: 5%;
+}
+
+#parrAPerfil {
+  position: relative;
+  bottom: 15px;
+  left: 0.1%;
+  margin: 0 0;
+  color: gray;
+  font-size: 20px;
+  font-weight: 100;
+  top: 5%;
+}
+
+#lineaAgregar1 { 
+  border: 1px solid #3e4046;
+}
+
+#lineaAgregar2 { 
+  position: relative;
+  top: -90px;
+  border: 1px solid #3e4046;
+}
+
+
+.iconAddPerfil { 
+    margin: 20px 0;
+    background: #ffba08;
+    padding: 30 30;
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    border: 4px solid #ffba08;
+}
+
+#inputNombrePerfil { 
+  position: relative;
+  left: 23%;
+  top: -150px;
+  border: 0;
+  background: #464b50;
+  /* background: #212529; */
+  display: block;
+  margin: 20px;
+  text-align: left;
+  border: 3px solid #464b50;
+  padding: 20px 10px;
+  width: 500px;
+  outline: none;
+  color: white;
+  border-radius: 1px;
+  transition: 0.25px;
+}
+
+
+
+#inputNombrePerfil:focus { 
+  border-color: #ffba08;
+}
+
+.gridBotonesAdd {
+  position: relative;
+  top: -90px;
+  display: grid;
+  justify-content: flex-start;
+  grid-template-rows:    repeat(1, 51px);
+  grid-template-columns: repeat(2, 200px);
+  grid-gap: 2rem;
+}
+
+#btnAddCont:enabled {
+  width: 200px;
+  border: 0;
+  background: #ffba08;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: 3px solid #ffba08;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 1px;
+  transition: 0.25px;
+  cursor: pointer;
+  height: 51px;
+}
+
+#btnAddCont:disabled {
+  width: 200px;
+  border: 0;
+  background: #ffcd4e;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: 3px solid #ffcd4e;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 1px;
+  transition: 0.25px;
+  height: 51px;
+}
+
+#btnAddCanc {
+  width: 200px;
+  top: 20px;
+  border: 0;
+  background: #131416;
+  height: 51px;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  border: 1px solid #828a94;
+  padding: 14px 10px;
+  outline: none;
+  color: #828a94;
+  border-radius: 1px;
+  transition: 0.25px;
+  cursor: pointer;
+}
+
+#btnAddCanc:hover, #btnmanejar:hover { 
+  background: #464b50;
+}
+
+/* css planes */
+.contenedorPlanes {
+  position: relative;
+  left: 25%;
+  width: 950px;
+}
+
+#eligePlan, #listaPlanes {
+  color: white;
+}
+
+#eligePlan {
+  font-weight: 700;
+}
+
+.gridPlanes {
+  padding: 50px 10px;
+  display: grid;
+  align-items: center;
+  justify-content: end;
+  border-radius: 15px;
+  grid-template-rows:    repeat(1, 140px);
+  grid-template-columns: repeat(3, 140px);
+  grid-gap: 3rem;
+}
+
+.planes {
+  display: grid;
+  height: 140px;
+  width: 140px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.inactivo {
+  background-color: #ffcd4e;
+}
+
+.activo {
+  background-color: #ffba08;
+}
+
+.gridDeGrids {
+  display: grid;
+  justify-items: start;
+  grid-template-rows:    repeat(1, 335);
+  grid-template-columns: repeat(4, 300px);
+}
+
+.gridInfo {
+  display: grid;
+  align-items: center;
+  grid-gap: 1rem;
+}
+
+.gridBasico {
+  position: relative;
+  left: 160px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 1rem;
+}
+
+.gridEstandar {
+  position: relative;
+  left: 54px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 1rem;
+}
+
+.gridAvanzado {
+  position: relative;
+  left: -72px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 1rem;
+}
+
+#info {
+  color: white;
+  font-size: 20px;
+}
+
+#txtBasico {
+  color: white;
+  font-size: 20px;
+}
+
+#txtEstandar {
+  color: white;
+  font-size: 20px;
+}
+
+#txtAvanzado {
+  color: white;
+  font-size: 20px;
+}
+
+#lineaInfo {
+  width: 1000px;
+}
+
+#Continuar {
+  text-align: center;
+}
+
+#btnContinuar:disabled {
+  position: relative;
+  width: 400px;
+  top: 50px;
+  border: 0;
+  background: #ffcd4e;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: 3px solid #ffcd4e;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+}
+
+#btnContinuar:enabled {
+  position: relative;
+  width: 400px;
+  top: 50px;
+  border: 0;
+  background: #ffba08;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: 3px solid #ffba08;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+}
+
+.App {
+  text-align: center;
+}
+
+.ErrorPage {
+  text-align: center;
+}
+
+/* css registrar y login */
+h1#error {
+  position: relative;
+  top: 300px;
+  text-align: center;
+  justify-content: center;
+  color: #ffba08
+}
+
+h1#titulo {
+  position: relative;
+  font-size: 45px;
+  color: #ffba08;
+  left: 2%;
+}
+
+.box {
+  position: relative;
+  width: 600px;
+  padding: 50px;
+  align-items: center;
+  justify-content: center;
+  top: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  text-align: center;
+  border-radius: 7px;
+}
+
+#loginForm {
+  width: 300px;
+}
+
+#loginForm input {
+  height: 0px;
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  grid-template-rows:    repeat(2, 49px);
+  grid-template-columns: repeat(2, 246px);
+  grid-gap: 2rem;
+}
+
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.box input {
+  border: 0;
+  background: #212529;
+  /* background: #212529; */
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 3px solid #212529;
+  padding: 20px 10px;
+  width: 220px;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+}
+
+select{
+  border: 0;
+  background: #212529;
+  /* background: #212529; */
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 3px solid #212529;
+  padding: 20px 10px;
+  width: 245px;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+}
+
+
+.box input:focus, select:focus {
+  
+  border-color: #ffba08;
+}
+
+.box button:enabled {
+  position: relative;
+  width: 246px;
+  top: 40px;
+  border: 0;
+  background: #ffba08;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: 3px solid #ffba08;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+}
+
+p {
+  color: red;
+  position: relative;
+  top:-18px;
+  left: -25px;
+  font-size: 14px;
+}
+
+#inicioSesion{
+  position: relative;
+  left: 92%;
+  top: -90px;
+  border: 0;
+  background: #ffba08;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  border: 3px solid #ffba08;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+  padding: 14px 10px;
+}
+
+.box button:enabled:hover, #inicioSesion:hover, #btnContinuar:enabled:hover, #btnAddCont:enabled:hover {
+  background: black;
+}
+
+/*css de home page*/
+#tituloHome {
+  position: relative;
+  font-size: 45px;
+  color: #ffba08;
+  left: 2%;
+  margin: 5px;
+  padding: 5px;
+}
+
+.mainNav { 
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #131416;
+  display: grid;
+  align-content: center;
+  
+}
+
+.primaryNav {
+  position: relative;
+  top: -50px;
+  left: 330px;
+  display: inline-block;
+  list-style-type: none;
+  padding: 0; 
+  margin: 0; 
+}
+
+.navTab {
+  position: relative;
+  padding: 20px;
+  font-size: 25px; 
+  color: white;
+  display: inline
+}
+
+.secondaryNav { 
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 5px;
+  right: 4%;
+  color: white;
+}
+
+.navElem { 
+  position: relative;
+  padding: 20px;
+  font-size:25px;
+}
+
+.peliGrande {
+  position: relative;
+  top: 82px;
+  width: 100%;
+  height: 770px;
+  background: white;
+}
