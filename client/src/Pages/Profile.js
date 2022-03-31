@@ -51,17 +51,17 @@ const Profile = () => {
   useEffect(() => {
     if(idPlan === 'pl1') {
       console.log("plan1")
-      setMaxPerfiles(1);
+      setMaxPerfiles((prev) => { prev = prev + 1});
       console.log(maxPerfiles)
       setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(1, 200px)' });
     } else if(idPlan === 'pl2'){
       console.log("plan")
-      setMaxPerfiles(4);
+      setMaxPerfiles((prev) => { prev = prev + 4});
       console.log(maxPerfiles)
       setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(5 200px)' });
     } else if(idPlan === 'pl3') {
       console.log("plan3")
-      setMaxPerfiles(8);
+      setMaxPerfiles((prev) => { prev = prev + 8});
       console.log(maxPerfiles)
       setGrids({ gridTemplateRows: 'repeat(2, 200px)', gridTemplateColumns: 'repeat(4, 200px)' });
     }
