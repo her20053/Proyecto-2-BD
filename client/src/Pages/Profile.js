@@ -44,34 +44,38 @@ const Profile = () => {
       // response.data.map(p => { planesNombreTemp.push(p.nombre) })
       // console.log(planesNombreTemp)
       // console.log(typeof (nombrePlanes))
-      console.log(response.data)
+      //console.log(response.data)
       // console.log(nombrePlanes)
 
-      // if (nombrePlanes.objects.length > 0) {
-      //   setNumeroPerfiles(nombrePlanes.objects.length)
-      // }
+     setTimeout(() => {
+      if (nombrePlanes.length > 0) {
+        setNumeroPerfiles(nombrePlanes.length)
+      }
 
-      // if (idPlan === 'pl1') {
-      //   console.log("plan1")
-      //   setMaxPerfiles((prev) => { prev = prev + 1 });
-      //   console.log(maxPerfiles)
-      //   setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(1, 200px)' });
-      // } else if (idPlan === 'pl2') {
-      //   console.log("plan")
-      //   setMaxPerfiles((prev) => { prev = prev + 4 });
-      //   console.log(maxPerfiles)
-      //   setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(5 200px)' });
-      // } else if (idPlan === 'pl3') {
-      //   console.log("plan3")
-      //   setMaxPerfiles((prev) => { prev = prev + 8 });
-      //   console.log(maxPerfiles)
-      //   setGrids({ gridTemplateRows: 'repeat(2, 200px)', gridTemplateColumns: 'repeat(4, 200px)' });
-      // }
+      console.log(nombrePlanes.length)
+
+      if (idPlan === 'pl1') {
+        console.log("plan1")
+        setMaxPerfiles((prev) => { prev = prev + 1 });
+        console.log(maxPerfiles)
+        setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(1, 200px)' });
+      } else if (idPlan === 'pl2') {
+        console.log("plan")
+        setMaxPerfiles((prev) => { prev = prev + 4 });
+        console.log(maxPerfiles)
+        setGrids({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(4 200px)' });
+      } else if (idPlan === 'pl3') {
+        console.log("plan3")
+        setMaxPerfiles((prev) => { prev = prev + 8 });
+        console.log(maxPerfiles)
+        setGrids({ gridTemplateRows: 'repeat(2, 200px)', gridTemplateColumns: 'repeat(4, 200px)' });
+      }
+     }, 2000)
 
     });
   }, [])
 
-  console.log(nombrePlanes, " console log fuera de useState")
+  // console.log(nombrePlanes, " console log fuera de useState")
 
   //seteando el contador igual al numero de perfiles del
   // useEffect(() => { 
@@ -111,42 +115,15 @@ const Profile = () => {
             )
           })
         }
-
-        {/* <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Joe</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Jack</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Mombi</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Pablish</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Meli</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Marie</h4>
-        </div>
-        <div>
-          <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
-          <h4>Mike</h4>
-        </div> */}
-
-
-
-        <div>
-          <AddCircle onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
-          <h4>Agregar Perfil</h4>
-        </div>
+        {numeroPerfiles == maxPerfiles ? 
+          () => {return 
+          <div>
+            <AddCircle onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
+            <h4>Agregar Perfil</h4>
+          </div>}
+          : <h1></h1>
+        }
+        
       </div>
       <div className="Manejar">
         <button id="btnmanejar">Manejar Perfiles</button>
