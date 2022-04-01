@@ -109,7 +109,7 @@ const Profile = () => {
           // Ver si renderizamos el boton de mas
           (numeroPerfiles == maxPerfiles)
             ?
-            <p></p>
+            null
             :
             <div>
               <AddCircle onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
