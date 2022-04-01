@@ -11,7 +11,7 @@ const Profile = () => {
 
   const [numeroPerfiles, setNumeroPerfiles] = useState(0);
   const [maxPerfiles, setMaxPerfiles] = useState(0);
-  const [grid, setGrids] = useState({ gridTemplateRows: 'repeat(2, 200px)', gridTemplateColumns: 'repeat(4, 200px)' });
+  const [grid, setGrids] = useState({ gridTemplateRows: 'repeat(1, 200px)', gridTemplateColumns: 'repeat(1, 200px)' });
   const [url, setUrl] = useState(window.location.href);
   const [arrayTemp, setArrayTemp] = useState(url.split('/'));
   const [idUsuario, setIdUsuario] = useState(arrayTemp[arrayTemp.length - 1]);
@@ -88,7 +88,7 @@ const Profile = () => {
     <div className='Profile'>
       <h1 onClick={() => { navigate("/") }} id="titulo">MEMEFLIX</h1>
       <h1 id='quien'>¿Quién Está Viendo?</h1>
-      <div className='gridPerfiles' onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns }}>
+      <div className='gridPerfiles' style={{ gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns }}>
 
         {/* <h1 style={{ color: 'white' }}>{typeof (nombrePlanes)}</h1> */}
 
@@ -105,7 +105,7 @@ const Profile = () => {
           nombrePlanes.map(nombre => {
             return (
               <div key={nombre}>
-                <TagFaces style={{ color: "white", fontSize: '180' }} className="perfil" />
+                <TagFaces onClick={() => { navigate(`/home/${idUsuario}/${nombre}`) }} style={{ color: "white", fontSize: '180' }} className="perfil" />
                 <h4>{nombre}</h4>
               </div>
             )
@@ -144,7 +144,7 @@ const Profile = () => {
 
 
         <div>
-          <AddCircle style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
+          <AddCircle onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
           <h4>Agregar Perfil</h4>
         </div>
       </div>
