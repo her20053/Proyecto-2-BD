@@ -20,6 +20,9 @@ const Profile = () => {
   const [idPlan, setIdPlan] = useState("")
   const [nombrePlanes, setNombrePlanes] = useState([])
 
+  const [msettings, setMsettings] = useState("Eliminar Perfil")
+
+
   useEffect(() => {
 
     Axios.post('http://localhost:3001/retraerPlan', {
@@ -73,12 +76,31 @@ const Profile = () => {
   },
     [grid])
 
-
-
-
-
   console.log("---------------------RENDER----------------------")
   console.log(numeroPerfiles == maxPerfiles)
+
+  const manejarSettings = () => {
+    setMsettings(
+      (prev) => {
+        return (
+          prev === 'Eliminar Perfil'
+            ? "Listo"
+            : 'Eliminar Perfil'
+        )
+      }
+    )
+  }
+
+  function quitarPerfilPantalla(nombre_perfil) {
+    setNombrePlanes(nombrePlanes.filter(n => n !== nombre_perfil))
+    fetch('http://localhost:3001/quitarPerfil', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nombre_perfil }),
+    })
+  }
 
 
   return (
@@ -95,10 +117,13 @@ const Profile = () => {
             return (
               <div key={nombre}>
                 <TagFaces onClick={() => {
-                  navigate(`/home/${idUsuario}/${nombre}`)
+                  msettings == "Listo"
+                    ? quitarPerfilPantalla(nombre)
+                    : navigate(`/home/${idUsuario}/${nombre}`)
                 }}
                   style={{ color: "white", fontSize: '180' }}
-                  className="perfil" />
+                  className="perfil"
+                  id={msettings == "Listo" ? "enEdicion" : "sinEdicion"} />
                 <h4>{nombre}</h4>
               </div>
             )
@@ -111,9 +136,12 @@ const Profile = () => {
             ?
             null
             :
-            <div>
-              <AddCircle onClick={() => { navigate(`/addprofile/${idUsuario}`) }} style={{ color: "white", fontSize: '180' }} id='agregarPerfil' />
-              <h4>Agregar Perfil</h4>
+            <div id='objetoPerfil'>
+              <AddCircle
+                onClick={() => { navigate(`/addprofile/${idUsuario}`) }}
+                style={{ color: "white", fontSize: '180' }}
+                id='agregarPerfil' />
+              <h4 id='textoPerfil'>Agregar Perfil</h4>
             </div>
         }
 
@@ -121,7 +149,7 @@ const Profile = () => {
 
       </div>
       <div className="Manejar">
-        <button id="btnmanejar">Manejar Perfiles</button>
+        <button id="btnmanejar" onClick={manejarSettings}>{msettings}</button>
       </div>
     </div>
   )

@@ -80,56 +80,65 @@ app.post("/suscripciones", (req, res) => {
     })
 })
 
-app.post("/retraerPlan", (req, res) => { 
+app.post("/retraerPlan", (req, res) => {
     const id_usuario = req.body.id_usuario;
 
-    con.connect(function (err) { 
+    con.connect(function (err) {
         console.log("conectado")
 
         con.query(
-            'SELECT id_plan FROM suscripciones WHERE id_usuario = ?', 
+            'SELECT id_plan FROM suscripciones WHERE id_usuario = ?',
             [id_usuario],
-            (err, result) => { 
+            (err, result) => {
 
-                if(err) { 
-                    res.send({err: err})
+                if (err) {
+                    res.send({ err: err })
                 }
-                
+
 
                 if (result.length > 0) {
                     res.send(result);
-                } else { 
-                    res.send({message: "Combinacion de usuario y contrasena incorrectos!"})
+                } else {
+                    res.send({ message: "Combinacion de usuario y contrasena incorrectos!" })
                 }
             }
         )
     })
 })
 
-app.post("/retraerPerfiles", (req, res) => { 
+app.post("/retraerPerfiles", (req, res) => {
     const id_usuario = req.body.id_usuario;
 
-    con.connect(function (err) { 
+    con.connect(function (err) {
         console.log("conectado")
 
         con.query(
-            'SELECT nombre FROM perfiles WHERE id_usuario = ? AND estatus = 1', 
+            'SELECT nombre FROM perfiles WHERE id_usuario = ? AND estatus = 1',
             [id_usuario],
-            (err, result) => { 
+            (err, result) => {
 
-                if(err) { 
-                    res.send({err: err})
+                if (err) {
+                    res.send({ err: err })
                 }
-                
+
 
                 if (result.length > 0) {
                     res.send(result);
-                } else { 
-                    res.send({message: "Este usuario no tiene perfiles!"})
+                } else {
+                    res.send({ message: "Este usuario no tiene perfiles!" })
                 }
             }
         )
     })
+})
+
+app.post("/quitarPerfil", (req, res) => {
+    con.query(
+        'DELETE FROM perfiles WHERE nombre = ?', [req.body.nombre_perfil],
+        function (error, resultado) {
+            console.log("Perfil eliminado")
+        }
+    )
 })
 
 app.post("/agregarPerfil", (req, res) => {
@@ -138,7 +147,7 @@ app.post("/agregarPerfil", (req, res) => {
 
     var today = new Date();
     let fecha = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    
+
     const id = 'pe' + Math.floor(Math.random() * 100000);
     const id_usuario = req.body.id_usuario;
     const nombre = req.body.nombre;
@@ -159,24 +168,24 @@ app.post("/agregarPerfil", (req, res) => {
     })
 })
 
-app.post("/retraerUsuarios", (req, res) => {    
+app.post("/retraerUsuarios", (req, res) => {
     const n = req.body.u_temp
     const c = req.body.c_temp
     con.query(
         `SELECT * FROM memflixdatabase.usuarios WHERE correo = ?`,
         [n],
         (err, result) => {
-            
+
             console.log(result)
 
-            if(err){
-                res.send({error:err})
+            if (err) {
+                res.send({ error: err })
             }
-            if(result.length > 0){
+            if (result.length > 0) {
                 res.send(result);
             }
-            else{
-                res.send({mensaje_error : 'Usuario o clave incorrectos'})
+            else {
+                res.send({ mensaje_error: 'Usuario o clave incorrectos' })
             }
 
         }
