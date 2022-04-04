@@ -13,7 +13,7 @@ const Prueba2 = ({ title, fetchurl, isLargeRow }) => {
         async function fetchData() {
             const request = await axios.get(fetchurl);
             setPeliculas(request.data.results)
-            console.log(request.data.results)
+            console.log(request.data.results[1].backdrop_path)
             return request;
         }
         fetchData();

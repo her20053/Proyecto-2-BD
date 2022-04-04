@@ -192,6 +192,30 @@ app.post("/retraerUsuarios", (req, res) => {
     )
 })
 
+app.post("/retraerAdmin", (req, res) => {
+    const n = req.body.u_temp
+    const c = req.body.c_temp
+    con.query(
+        `SELECT * FROM memflixdatabase.administradores WHERE correo = ?`,
+        [n],
+        (err, result) => {
+
+            console.log(result)
+
+            if (err) {
+                res.send({ error: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ mensaje_error: 'Usuario o clave incorrectos' })
+            }
+
+        }
+    )
+})
+
 app.listen(3001, () => {
     console.log('App corriendo en el puerto 3001')
 })

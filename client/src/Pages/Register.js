@@ -77,7 +77,7 @@ const Register = () => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
 
-    if(Object.keys(formErrors).length === 0 && isSubmit) {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
 
       let id = 'u' + Math.floor(Math.random() * 100000)
       let nombre_persona = document.getElementById('nombre').value;
@@ -107,7 +107,10 @@ const Register = () => {
 
     <div className='Register'>
       <h1 onClick={() => { navigate("/") }} id="titulo">MEMEFLIX</h1>
-      <button onClick={() => { navigate("/login") }} id="inicioSesion">Iniciar Sesion</button>
+      <div className='gridBtnsReg'>
+        <button onClick={() => { navigate("/loginadmin") }} id="administrador">Administrador</button>
+        <button onClick={() => { navigate("/login") }} id="inicioSesion">Iniciar Sesion</button>
+      </div>
       <div className="box" onSubmit={handleSubmit}>
 
         <h1>Registrar Usuario</h1>

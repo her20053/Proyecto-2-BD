@@ -6,7 +6,7 @@ const Nav = () => {
     const [show, handleShow] = useState(false);
 
     const handleScroll = () => {
-        console.log(window.scrollY)
+        // console.log(window.scrollY)
         if (window.scrollY > 100) {
             handleShow(true);
         } else handleShow(false);
