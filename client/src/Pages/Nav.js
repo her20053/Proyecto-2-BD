@@ -3,7 +3,7 @@ import { TagFaces, Search } from '@material-ui/icons';
 
 const Nav = () => {
 
-    const [show, handleShow] = useState(true);
+    const [show, handleShow] = useState(false);
 
     useEffect(() => {
         window.addEventListener("scroll", () => {

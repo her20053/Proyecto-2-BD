@@ -1,32 +1,29 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import Filas from './Filas';
+import Banner from './Banner';
+import Nav from './Nav';
 
-const Home= ()=> {
+const Prueba1 = () => {
 
-  let navigate = useNavigate();
-  let {profile} = useParams;
+    const API_KEY = '220ceb671f48c61d05bf9207f8306daa';
 
-  return (
-    <div className='Home'>Home
-      <div className = "peliGrande">
+    return (
+        <div className='HomeP'>
 
-      </div>
-      <div className='mainNav' role='navigation'>
-        <h1 onClick={() => {navigate("/home/1/2")}} id = "tituloHome">MEMEFLIX</h1>
-        <ul className="primaryNav">
-          <li className="navTab">Inicio</li>
-          <li className="navTab">Peliculas</li>
-          <li className="navTab">Series</li>
-          <li className="navTab">Favoritos</li>
-        </ul>
-        <div className="secondaryNav">
-          <div className="navElem">Search</div>
-          <div className="navElem">Perfil</div>
+            <Nav />
+
+            <Banner />
+
+            <Filas title="Memeflix Originals" fetchurl={`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_networks=213`} isLargeRow />
+            <Filas title="Trending now" fetchurl={`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`} />
+            <Filas title="Top Rated" fetchurl={`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US`} />
+            <Filas title="Action Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=28`} />
+            <Filas title="Comedy Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=35`} />
+            <Filas title="Horror Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=27`} />
+            <Filas title="Romance Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`} />
+            <Filas title="Documentaries" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=99`} />
         </div>
-      </div>
-      
-    </div>
-  )
+    )
 }
 
-export default Home
+export default Prueba1

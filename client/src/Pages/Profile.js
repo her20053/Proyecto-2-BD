@@ -119,7 +119,7 @@ const Profile = () => {
                 <TagFaces onClick={() => {
                   msettings == "Listo"
                     ? quitarPerfilPantalla(nombre)
-                    : navigate(`/homep/${idUsuario}/${nombre}`)
+                    : navigate(`/home/${idUsuario}/${nombre}`)
                 }}
                   style={{ color: "white", fontSize: '180' }}
                   className="perfil"

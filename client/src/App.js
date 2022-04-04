@@ -5,7 +5,6 @@ import Profile from './Pages/Profile';
 import AddProfile from './Pages/AddProfile';
 import Planes from './Pages/Planes';
 import Home from './Pages/Home';
-import HomeP from './Pages/HomeP';
 import ErrorPage from './Pages/ErrorPage';
 
 const App = () => {
@@ -19,7 +18,6 @@ const App = () => {
           <Route path='/profile/:username' element={<Profile />} />
           <Route path='/addprofile/:username' element={<AddProfile />} />
           <Route path='/home/:username/:profile' element={<Home />} />
-          <Route path='/homep/:username/:profile' element={<HomeP />} />
           <Route path="*" element={<ErrorPage />} />
           {/*Esta debe de ser la ultima ruta siempre */}
         </Routes>

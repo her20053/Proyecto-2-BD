@@ -37,7 +37,7 @@ const Banner = () => {
                         Play</button>
                     <button className='botonBanner2'>
                         <Info />
-                        Mi Lista</button>
+                        More Info</button>
                 </div>
 
                 <h1 className='bannerDesc'>{pelicula?.overview}</h1>
