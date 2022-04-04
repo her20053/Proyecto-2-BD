@@ -5,18 +5,34 @@ const Nav = () => {
 
     const [show, handleShow] = useState(false);
 
+    const handleScroll = () => {
+        console.log(window.scrollY)
+        if (window.scrollY > 100) {
+            handleShow(true);
+        } else handleShow(false);
+    }
+
     useEffect(() => {
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 1) {
-                handleShow(true);
-            } else handleShow(false);
-        });
+        window.addEventListener('wheel', handleScroll);
         return () => {
-            window.removeEventListener("scroll");
-        }
+            window.removeEventListener("wheel", handleScroll);
+        };
     }, []);
 
-    console.log(window.scrollY)
+    const handleKeyDown = (event) => {
+        console.log('A key was pressed', event.keyCode);
+    };
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+
+        // cleanup this component
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
+
 
     return (
         <div className={`Nav ${show && "Nav_black"}`}>

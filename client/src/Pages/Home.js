@@ -8,7 +8,7 @@ const Prueba1 = () => {
     const API_KEY = '220ceb671f48c61d05bf9207f8306daa';
 
     return (
-        <div className='HomeP'>
+        <div className='Home'>
 
             <Nav />
 
