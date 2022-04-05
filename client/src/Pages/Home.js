@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Filas from './Filas';
 import Banner from './Banner';
 import Nav from './Nav';
+import Axios from 'axios';
 
-const Prueba1 = () => {
+const Home = () => {
 
-    const API_KEY = '220ceb671f48c61d05bf9207f8306daa';
+    const base_url = "https://image.tmdb.org/t/p/original/";
+    const url = window.location.href
+    const arrayTemp = url.split('/')
+    const nombrePerfil = arrayTemp[arrayTemp.length - 1]
+    const idUsuario = arrayTemp[arrayTemp.length - 2]
+    const [watched, setWatched] = useState([]);
+
+    useEffect(() => {
+
+        Axios.post('http://localhost:3001/retraerWatched', {
+            id_usuario: idUsuario,
+            nombre_perfil: nombrePerfil,
+        }).then((response) => {
+            // console.log(response.data);
+            setWatched(response.data);
+        });
+
+    }, [])
+
+
+    useEffect(() => {
+        console.log(watched, "USEEFFECT")
+    }, [watched])
+
+    const handleClick = () => {
+
+    }
 
     return (
         <div className='Home'>
@@ -14,16 +41,24 @@ const Prueba1 = () => {
 
             <Banner />
 
-            <Filas title="Memeflix Originals" fetchurl={`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_networks=213`} isLargeRow />
-            <Filas title="Trending now" fetchurl={`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US`} />
-            <Filas title="Top Rated" fetchurl={`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US`} />
-            <Filas title="Action Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=28`} />
-            <Filas title="Comedy Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=35`} />
-            <Filas title="Horror Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=27`} />
-            <Filas title="Romance Movies" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`} />
-            <Filas title="Documentaries" fetchurl={`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=99`} />
+            <div className='fila'>
+                <Filas title="Memeflix Originals" isLargeRow />
+                <Filas title="Trending now" />
+                <h1 className='tituloFilas' style={{ marginLeft: '40px' }}>Watch Again</h1>
+                <div className='filas_posters'>
+                    {watched.map(watched => (
+                        <img
+                            key={watched.id_pelicula}
+                            onClick={() => handleClick(watched)}
+                            className={`posters ${false && "posterGrande"}`}
+                            src={`${base_url}${false ? watched.poster_path : watched.backdrop_path}`}
+                            alt={watched.titulo} />
+                    ))}
+                </div>
+            </div>
+
         </div>
     )
 }
 
-export default Prueba1
+export default Home

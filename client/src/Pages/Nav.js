@@ -19,20 +19,6 @@ const Nav = () => {
         };
     }, []);
 
-    const handleKeyDown = (event) => {
-        console.log('A key was pressed', event.keyCode);
-    };
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-
-        // cleanup this component
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
-
-
 
     return (
         <div className={`Nav ${show && "Nav_black"}`}>

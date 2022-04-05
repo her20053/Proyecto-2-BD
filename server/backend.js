@@ -163,6 +163,7 @@ app.post("/agregarPerfil", (req, res) => {
             `INSERT INTO perfiles VALUES(?,?,?,?,?)`, [id, id_usuario, nombre, fecha_creacion, estatus],
             function (error, resultado) {
                 console.log("Dato ingresado")
+                res.send(id);
             }
         )
     })
@@ -210,6 +211,50 @@ app.post("/retraerAdmin", (req, res) => {
             }
             else {
                 res.send({ mensaje_error: 'Usuario o clave incorrectos' })
+            }
+
+        }
+    )
+})
+
+app.get("/retraerPelis", (req, res) => {
+    con.query('SELECT * FROM peliculas',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.post("/sendWatched", (req, res) => {
+    const peli = req.body.id_pelicula
+    const nombre = req.body.nombre_perfil
+    const id = req.body.id_usuario
+    con.query(
+        `INSERT INTO peliculas_vistas VALUES(?,?,?)`,
+        [id, nombre, peli],
+        function (error, resultado) {
+            console.log("Pelicula vista ingresada")
+        }
+    )
+})
+
+app.post("/retraerWatched", (req, res) => {
+    const id_usuario = req.body.id_usuario
+    const nombre_perfil = req.body.nombre_perfil
+    con.query(
+        `Select distinct * from peliculas p join peliculas_vistas vs on (p.id_pelicula = vs.id_peli) where vs.id_usuario = ? and vs.perfil = ?`,
+        [id_usuario, nombre_perfil],
+        (err, result) => {
+
+            console.log(result)
+
+            if (err) {
+                res.send({ error: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ mensaje_error: 'No hay peliculas vistas' })
             }
 
         }

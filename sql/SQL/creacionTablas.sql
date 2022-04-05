@@ -84,10 +84,9 @@ CREATE TABLE favoritos(
 );
 
 CREATE TABLE peliculas_vistas(
-	id_perfil VARCHAR(50),
-	id_pelicula VARCHAR(50),
-	FOREIGN KEY(id_pelicula) REFERENCES peliculas(id_pelicula) ON DELETE CASCADE,
-	FOREIGN KEY(id_perfil) REFERENCES perfiles(id_perfil) ON DELETE CASCADE
+	id_usuario VARCHAR(50),
+	perfil VARCHAR(50),
+	id_pelicula VARCHAR(50)
 );
 
 CREATE TABLE sugerencias(
