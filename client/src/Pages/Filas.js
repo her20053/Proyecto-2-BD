@@ -1,19 +1,18 @@
 import YouTube from 'react-youtube';
+import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import movieTrailer from 'movie-trailer';
 
-const Prueba2 = ({ title, fetchurl, isLargeRow }) => {
+const Prueba2 = ({ title, isLargeRow }) => {
 
-    const url = window.location.href
-    const arrayTemp = url.split('/')
-    const nombrePerfil = arrayTemp[arrayTemp.length - 1]
-    const idUsuario = arrayTemp[arrayTemp.length - 2]
+    let { username } = useParams();
+    let { profile } = useParams();
 
     const base_url = "https://image.tmdb.org/t/p/original/";
     const [peliculas, setPeliculas] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
-    const [idPelicula, setIdPelicula] = useState("");
+    const [idPerfil, setIdPerfil] = useState("");
 
 
     // useEffect(() => {
@@ -25,6 +24,15 @@ const Prueba2 = ({ title, fetchurl, isLargeRow }) => {
     //     }
     //     fetchData();
     // }, [fetchurl]);
+    useEffect(() => {
+        Axios.post('http://localhost:3001/retraerIdPerfil', {
+            id_usuario: username,
+            nombre_perfil: profile,
+        }).then((response) => {
+            // console.log(response.data[0].id_perfil);
+            setIdPerfil(response.data[0].id_perfil);
+        });
+    }, [])
 
     useEffect(() => {
         async function fetchPelis() {
@@ -48,11 +56,10 @@ const Prueba2 = ({ title, fetchurl, isLargeRow }) => {
     };
 
     async function sendWatched(id_pelicula) {
-        console.log(id_pelicula);
+        // console.log(id_pelicula);
         Axios.post('http://localhost:3001/sendWatched', {
             id_pelicula: id_pelicula,
-            id_usuario: idUsuario,
-            nombre_perfil: nombrePerfil,
+            id_perfil: idPerfil,
         }).then((response) => {
 
         });
@@ -91,4 +98,4 @@ const Prueba2 = ({ title, fetchurl, isLargeRow }) => {
     )
 }
 
-export default Prueba2
+export default Prueba2;

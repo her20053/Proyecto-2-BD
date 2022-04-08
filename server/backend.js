@@ -226,23 +226,45 @@ app.get("/retraerPelis", (req, res) => {
 
 app.post("/sendWatched", (req, res) => {
     const peli = req.body.id_pelicula
-    const nombre = req.body.nombre_perfil
-    const id = req.body.id_usuario
+    const id = req.body.id_perfil
     con.query(
-        `INSERT INTO peliculas_vistas VALUES(?,?,?)`,
-        [id, nombre, peli],
+        `INSERT INTO peliculas_vistas VALUES(?,?,NOW())`,
+        [id, peli],
         function (error, resultado) {
             console.log("Pelicula vista ingresada")
         }
     )
 })
 
-app.post("/retraerWatched", (req, res) => {
+app.post("/retraerIdPerfil", (req, res) => {
     const id_usuario = req.body.id_usuario
     const nombre_perfil = req.body.nombre_perfil
     con.query(
-        `Select distinct * from peliculas p join peliculas_vistas vs on (p.id_pelicula = vs.id_peli) where vs.id_usuario = ? and vs.perfil = ?`,
+        `SELECT id_perfil FROM perfiles WHERE id_usuario= ? AND nombre =?`,
         [id_usuario, nombre_perfil],
+        (err, result) => {
+
+            console.log(result)
+
+            if (err) {
+                res.send({ error: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ mensaje_error: 'No existe este perfil' })
+            }
+
+        }
+    )
+})
+
+app.post("/retraerWatched", (req, res) => {
+    const id_perfil = req.body.id_perfil
+    con.query(
+        `Select distinct * from peliculas p join peliculas_vistas vs on (p.id_pelicula = vs.id_pelicula) where vs.id_perfil = ?`,
+        [id_perfil],
         (err, result) => {
 
             console.log(result)
