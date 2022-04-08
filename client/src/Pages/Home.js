@@ -41,6 +41,8 @@ const Home = () => {
         console.log(watched, "USEEFFECT")
         if (watched.length > 0) {
             setHayWatched(true);
+        } else {
+            setHayWatched(false);
         }
         console.log(hayWatched)
     }, [watched])
