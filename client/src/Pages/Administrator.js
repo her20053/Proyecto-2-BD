@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 // Importando todos los modales requeridos para la pagina:
 
+
+// Columnas de herramientas para peliculas
 import ModalAgregarPelicula from './Modals/agregar-pelicula-folder/ModalAgregarPelicula'
 import ModalModificarPelicula from './Modals/modificar-pelicula-folder/ModalModificarPelicula'
 import ModalCorregirPelicula from './Modals/corregir-pelicula-folder/ModalCorregirPelicula'
@@ -16,6 +18,8 @@ const Administrator = () => {
 
     let navigate = useNavigate();
 
+
+    // Columnas de herramientas para peliculas
     const [modal_map, setmodal_map] = useState(false);
     const [modal_mmp, setmodal_mmp] = useState(false);
     const [modal_mcp, setmodal_mcp] = useState(false);
