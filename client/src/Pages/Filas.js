@@ -13,7 +13,8 @@ const Prueba2 = ({ title, isLargeRow }) => {
     const [peliculas, setPeliculas] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const [idPerfil, setIdPerfil] = useState("");
-
+    const[info,setinfo]=useState([]);
+    const[click,setclick]=useState(false);
 
     // useEffect(() => {
     //     async function fetchData() {
@@ -33,7 +34,6 @@ const Prueba2 = ({ title, isLargeRow }) => {
             setIdPerfil(response.data[0].id_perfil);
         });
     }, [])
-
     useEffect(() => {
         async function fetchPelis() {
             fetch('http://localhost:3001/retraerPelis'
@@ -46,7 +46,6 @@ const Prueba2 = ({ title, isLargeRow }) => {
         }
         fetchPelis();
     }, [])
-
     const opts = {
         height: "900",
         width: "100%",
@@ -64,11 +63,29 @@ const Prueba2 = ({ title, isLargeRow }) => {
 
         });
     }
+    const retraerpeliculas = async (id_pelicula_parametro) => {
+
+        const id_pelicula = id_pelicula_parametro
+
+        fetch('http://localhost:3001/retraerpeli',
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_pelicula})
+        }).then((response) => response.json())
+        .then((data) => {
+            setinfo(data[0])
+        })
+    }
+
 
     const handleClick = (peliculas) => {
         if (trailerUrl) {
             setTrailerUrl('');
+            setclick(false)
         } else {
+            setclick(true)
+            retraerpeliculas(peliculas.id_pelicula)
             movieTrailer(peliculas?.titulo || "")
                 .then(url => {
                     sendWatched(peliculas.id_pelicula);
@@ -84,18 +101,31 @@ const Prueba2 = ({ title, isLargeRow }) => {
         <div className='fila'>
             <h1 className='tituloFilas'>{title}</h1>
             <div className="filas_posters">
-                {peliculas.map(peliculas => (
-                    <img
-                        key={peliculas.id_pelicula}
-                        onClick={() => handleClick(peliculas)}
-                        className={`posters ${isLargeRow && "posterGrande"}`}
-                        src={`${base_url}${isLargeRow ? peliculas.poster_path : peliculas.backdrop_path}`}
-                        alt={peliculas.titulo} />
+                {peliculas.map(pelicula => (
+                    <div> 
+                        <img
+                            key={pelicula.id_pelicula}
+                            onClick={() => handleClick(pelicula)}
+                            className={`posters ${isLargeRow && "posterGrande"}`}
+                            src={`${base_url}${isLargeRow ? pelicula.poster_path : pelicula.backdrop_path}`}
+                            alt={pelicula.titulo} />
+                        
+                    </div>
+
+
                 ))}
             </div>
+            {click && info && <div className='barrainfo'>
+                <div className='contendor_img'>
+                    <img className='img_info' src={`${base_url}${info.backdrop_path}`} alt={info.titulo}/>
+                </div>
+                <h1 className='titulopeli'>{info.titulo}</h1>
+                <div className='infopeli'>{info.resumen}</div>
+                <button className='button_vd'>+</button>
+            </div>}
+            
             {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
         </div>
     )
 }
-
 export default Prueba2;

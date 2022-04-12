@@ -259,6 +259,26 @@ app.post("/retraerIdPerfil", (req, res) => {
         }
     )
 })
+app.post("/retraerpeli",(req,res)=>{
+    const id_peli=req.body.id_pelicula
+    con.query(
+        `SELECT * FROM peliculas WHERE id_pelicula=?`,[id_peli],
+        (err,result) =>{
+            console.log(result)
+            console.log(id_peli)
+            if(err){
+                console.log("Hubo un error")
+                res.send({error:err})
+            }
+            if(result.length>0){
+                res.send(result);
+            }
+            else{
+                res.send({mensaje_error: 'No existe una pelicula con ese id'})
+            }
+        }
+    )
+})
 
 app.post("/retraerWatched", (req, res) => {
     const id_perfil = req.body.id_perfil
