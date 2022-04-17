@@ -54,7 +54,7 @@ const Home = () => {
     return (
         <div className='Home'>
 
-            <Nav />
+            <Nav/>
 
             <Banner />
 

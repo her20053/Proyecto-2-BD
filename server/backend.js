@@ -302,6 +302,32 @@ app.post("/retraerWatched", (req, res) => {
         }
     )
 })
+app.post("/retraerpelisearch", (req, res) => {
+    const input = req.body.dato_ingresado
+    con.query(
+        `Select distinct * from memflixdatabase.peliculas p 
+        join memflixdatabase.premios_pelicula p_p on (p.id_pelicula = p_p.id_pelicula)
+        join memflixdatabase.premios pre on(p_p.id_premio=pre.id_premio)
+        join memflixdatabase.directores dr on(p.id_pelicula=dr.id_pelicula)
+        where p.titulo=? or pre.nombre_premio=? or dr.nombre=?`,
+        [input,input,input],
+        (err, result) => {
+
+            console.log(result)
+
+            if (err) {
+                res.send({ error: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ mensaje_error: 'No hay peliculas vistas' })
+            }
+
+        }
+    )
+})
 
 app.listen(3001, () => {
     console.log('App corriendo en el puerto 3001')

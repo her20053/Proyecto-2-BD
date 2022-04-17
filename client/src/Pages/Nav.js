@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { TagFaces, Search } from '@material-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
-
+    let navigate = useNavigate();
     const [show, handleShow] = useState(false);
 
     const handleScroll = () => {
@@ -29,7 +30,7 @@ const Nav = () => {
                 <h4>Shows</h4>
                 <h4>Favorites</h4>
             </div>
-            <Search id='searchNav' style={{ color: "white", fontSize: '35', objectFit: "contain" }} />
+            <Search id='searchNav' onClick={()=>{navigate('/home/search')}} style={{ color: "white", fontSize: '35', objectFit: "contain" }} />
             <TagFaces id='avatarNav' style={{ borderRadius: "4px", background: "#ffba08", color: "white", fontSize: '35', objectFit: "contain" }} />
         </div>
     )
