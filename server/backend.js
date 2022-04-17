@@ -283,7 +283,9 @@ app.post("/retraerpeli",(req,res)=>{
 app.post("/retraerWatched", (req, res) => {
     const id_perfil = req.body.id_perfil
     con.query(
-        `Select distinct * from peliculas p join peliculas_vistas vs on (p.id_pelicula = vs.id_pelicula) where vs.id_perfil = ?`,
+        `Select distinct memflixdatabase.p.id_pelicula,memflixdatabase.p.titulo,memflixdatabase.p.resumen,memflixdatabase.p.url,memflixdatabase.p.duracion,memflixdatabase.p.fecha_estreno,memflixdatabase.p.rating,memflixdatabase.p.poster_path,memflixdatabase.p.backdrop_path from memflixdatabase.peliculas p 
+        join memflixdatabase.peliculas_vistas vs on (p.id_pelicula = vs.id_pelicula)
+        where vs.id_perfil = ?`,
         [id_perfil],
         (err, result) => {
 
@@ -305,12 +307,14 @@ app.post("/retraerWatched", (req, res) => {
 app.post("/retraerpelisearch", (req, res) => {
     const input = req.body.dato_ingresado
     con.query(
-        `Select distinct * from memflixdatabase.peliculas p 
+        `Select distinct memflixdatabase.p.id_pelicula,memflixdatabase.p.titulo,memflixdatabase.p.resumen,memflixdatabase.p.url,memflixdatabase.p.duracion,memflixdatabase.p.fecha_estreno,memflixdatabase.p.rating,memflixdatabase.p.poster_path,memflixdatabase.p.backdrop_path from memflixdatabase.peliculas p 
         join memflixdatabase.premios_pelicula p_p on (p.id_pelicula = p_p.id_pelicula)
         join memflixdatabase.premios pre on(p_p.id_premio=pre.id_premio)
         join memflixdatabase.directores dr on(p.id_pelicula=dr.id_pelicula)
-        where p.titulo=? or pre.nombre_premio=? or dr.nombre=?`,
-        [input,input,input],
+        join memflixdatabase.actores_pelicula ac on(p.id_pelicula=ac.id_pelicula)
+        join memflixdatabase.actores a on(ac.id_actor=a.id_actor)
+        where p.titulo=? or pre.nombre_premio=? or dr.nombre=? or a.nombre=?`,
+        [input,input,input,input],
         (err, result) => {
 
             console.log(result)

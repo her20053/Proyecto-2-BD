@@ -148,3 +148,9 @@ CREATE TABLE directores(
 	edad INT NOT NULL,
 	FOREIGN KEY(id_pelicula) REFERENCES peliculas(id_pelicula) ON DELETE CASCADE
 );
+CREATE TABLE actores_pelicula(
+	id_actor VARCHAR(50),
+	id_pelicula VARCHAR(50),
+	FOREIGN KEY(id_actor) REFERENCES actores(id_actor) ON DELETE CASCADE,
+	FOREIGN KEY(id_pelicula) REFERENCES peliculas(id_pelicula) ON DELETE CASCADE
+);

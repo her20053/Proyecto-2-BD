@@ -16,6 +16,8 @@ const Prueba2 = ({ title, isLargeRow }) => {
     const[info,setinfo]=useState([]);
     const[click,setclick]=useState(false);
     const[input,setinput]=useState("")
+    const[haypelis,sethaypelis]=useState(true);
+
     function ingresarpelicula(){
         let input_usuario = document.getElementById('search_input').value;
         retraerpeliculas1(input_usuario);
@@ -32,6 +34,8 @@ const Prueba2 = ({ title, isLargeRow }) => {
         }).then((response) => response.json())
         .then((data) => {
             setPeliculas(data)
+            haypelisf()
+            console.log(haypelis)
         })
     }
 
@@ -115,7 +119,13 @@ const Prueba2 = ({ title, isLargeRow }) => {
                 }).catch(error => console.log(error))
         }
     }
-
+    function haypelisf(){
+        if(peliculas.length >0){
+            sethaypelis(true)
+        }else{
+            sethaypelis(false)
+        }
+    }
     return (
 
         <div className='fila'>
@@ -128,7 +138,7 @@ const Prueba2 = ({ title, isLargeRow }) => {
                 />
                 <button className='button_search' onClick={ingresarpelicula}>Buscar</button>
             </div>
-            <h1 className='tituloFilas'>{title}</h1>
+            <h1 className='tituloFilas'>{title}</h1> 
             <div className="filas_posters">
                 {peliculas.map(pelicula => (
                     <div> 
