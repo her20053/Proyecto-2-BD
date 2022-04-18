@@ -344,6 +344,17 @@ app.post("/retraerpelisearch", (req, res) => {
     )
 })
 
+
+app.get("/retraerAnuncios", (req, res) => {
+    console.log("Se estan retrayendo anunciantes")
+    con.query('SELECT * FROM anunciante',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+
+
 app.listen(3001, () => {
     console.log('App corriendo en el puerto 3001')
 })
