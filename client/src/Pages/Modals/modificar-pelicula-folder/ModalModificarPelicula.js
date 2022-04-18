@@ -18,7 +18,6 @@ function ModalModificarPelicula({ cerrarModal }) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idp, nuevovalor, area })
             }).then((response) => response.json())
-            cerrarModal(false)
 
     }
 
