@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import Axios from 'axios';
 
 const UpdatePlanes = () => {
 
@@ -17,6 +17,8 @@ const UpdatePlanes = () => {
     const [estandar, setEstandar] = useState({ color: 'white' })
     const [avanzado, setAvanzado] = useState({ color: 'white' })
     const [plan, setPlan] = useState('')
+
+    const [planes_de_perfil, setplanes_de_perfil] = useState([]);
 
 
     function toggleActive(index) {
@@ -59,22 +61,16 @@ const UpdatePlanes = () => {
 
     function ingresarPlan() {
 
-        let url = window.location.href
-        let arrayTemp = url.split('/')
+        const id_usuario = username
+        const id_plan = plan
 
-        var today = new Date();
-
-        let id = 's' + Math.floor(Math.random() * 100000)
-        let id_usuario = arrayTemp[arrayTemp.length - 1]
-        let valido_hasta = (today.getFullYear() + 1) + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        let fecha_inicio = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         navigate(`/login`);
-        fetch('http://localhost:3001/suscripciones', {
+        fetch('http://localhost:3001/alterar_plan_suscripciones', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, id_usuario, plan, valido_hasta, fecha_inicio }),
+            body: JSON.stringify({ id_plan, id_usuario }),
         })
             .then(response => {
                 return response.text();
@@ -83,7 +79,36 @@ const UpdatePlanes = () => {
                 alert(data);
                 // getUsuarios();
             });
+
+
+        Axios.post('http://localhost:3001/retraer_perfiles_de_usuario', {
+            id_usuario_temp: id_usuario
+        }).then(res => {
+            console.log("------------------------------------");
+            // console.log(res.data);
+            // http://localhost:3000/updateplan/u33665
+            // http://localhost:3000/updateplan/u96169
+
+            const lista = res.data.map(l => {
+                return l
+            })
+
+            // console.log(lista, 'lista')
+
+            console.log([...lista])
+
+            setplanes_de_perfil([...lista])
+
+        })
+
     }
+
+    useEffect(() => {
+
+        console.log(planes_de_perfil, "Hola")
+
+
+    }, [planes_de_perfil]);
 
 
     return (
