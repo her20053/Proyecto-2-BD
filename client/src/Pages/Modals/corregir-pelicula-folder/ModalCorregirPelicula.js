@@ -8,8 +8,15 @@ function ModalCorregirPelicula({ cerrarModal }) {
 
     const [nuevovalor, setnuevovalor] = useState();
 
+    const [area, setarea] = useState();
+
     const handleClick = () => {
-        console.log(nuevovalor);
+        fetch('http://localhost:3010/admin_tools_modificar_pelicula',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idp, nuevovalor, area })
+            }).then((response) => response.json())
     }
 
     return (
@@ -23,7 +30,7 @@ function ModalCorregirPelicula({ cerrarModal }) {
                 </div>
                 <div className="area-info-modal">
                     <h1>Corregir pelicula</h1>
-                    <select>
+                    <select onChange={(e) => setarea(e.target.value)}>
                         <option value="backdrop_path">backdrop_path</option>
                         <option value="duracion">duracion</option>
                         <option selected value="fecha_estreno">fecha_estreno</option>

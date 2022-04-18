@@ -15,7 +15,17 @@ function ModalAgregarPelicula({ cerrarModal }) {
     const [url, seturl] = useState('');
 
     const handleClick = () => {
-        console.log("Hola");
+        console.log(JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp }))
+        fetch('http://localhost:3010/admin_tools_agregar_pelicula',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp }),
+            }).then(respuesta_back_end => {
+                console.log(respuesta_back_end)
+            })
     }
 
     return (

@@ -12,18 +12,12 @@ function ModalModificarPelicula({ cerrarModal }) {
 
     const handleClick = () => {
 
-        console.log(idp, nuevovalor, area)
-
         fetch('http://localhost:3010/admin_tools_modificar_pelicula',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ idp, nuevovalor, area })
             }).then((response) => response.json())
-            .then((data) => {
-                console.log(data[0]);
-            })
-
 
     }
 
