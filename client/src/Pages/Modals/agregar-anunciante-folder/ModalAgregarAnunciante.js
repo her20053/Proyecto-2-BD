@@ -8,7 +8,27 @@ function ModalAgregarAnunciante({ cerrarModal }) {
     const [anuncio, setanuncio] = useState('');
 
     const handleClick = () => {
-        console.log("Hola");
+
+        const nombre = anunciante;
+        const mensaje = anuncio;
+
+        fetch('http://localhost:3010/admin_agregar_anunciante', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nombre, mensaje }),
+        })
+            .then(response => {
+                return response.text();
+            })
+            .then(data => {
+                alert(data);
+                // getUsuarios();
+            });
+
+        cerrarModal(false)
+
     }
 
     return (
@@ -22,7 +42,7 @@ function ModalAgregarAnunciante({ cerrarModal }) {
                 </div>
                 <div className="area-info-modal">
                     <h1>Agregar nuevo anunciante</h1>
-                    <input type="text" onChange={(e) => setanunciante(e.target.value)} placeholder="ID Anunciante" />
+                    <input type="text" onChange={(e) => setanunciante(e.target.value)} placeholder="Nombre" />
                     <input type="text" onChange={(e) => setanuncio(e.target.value)} placeholder="Anuncio" />
                 </div>
                 <div className="area-enviar-modal">

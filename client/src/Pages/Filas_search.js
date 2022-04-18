@@ -128,7 +128,7 @@ const Prueba2 = ({ title, isLargeRow }) => {
     }
     return (
 
-        <div className='fila'>
+        <div className='filaSearch'>
             <div className='block_search'>
                 <input
                     type="text"

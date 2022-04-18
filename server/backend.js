@@ -193,6 +193,17 @@ app.post("/retraerUsuarios", (req, res) => {
     )
 })
 
+app.post("/agregarFallido", (req, res) => {
+    const n = req.body.u_temp
+    const id = 'if' + Math.floor(Math.random() * 100000);
+    con.query(
+        `INSERT INTO intentos_fallidos VALUES(?, ?, NOW())`, [id, n],
+        function (error, resultado) {
+            console.log("Dato ingresado")
+        }
+    )
+})
+
 app.post("/retraerAdmin", (req, res) => {
     const n = req.body.u_temp
     const c = req.body.c_temp
