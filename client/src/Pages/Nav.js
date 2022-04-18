@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { TagFaces, Search } from '@material-ui/icons';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Select } from '@mantine/core';
+import Axios from 'axios';
 
 const Nav = () => {
     let navigate = useNavigate();
     let { username } = useParams();
     let { profile } = useParams();
+
     const [show, handleShow] = useState(false);
-    // console.log(username)
+    const [nombresperfiles, setnombresperfiles] = useState([]);
+    const [value_select, setValueSelect] = useState('');
 
     const handleScroll = () => {
         // console.log(window.scrollY)
@@ -17,11 +21,36 @@ const Nav = () => {
     }
 
     useEffect(() => {
+
+        Axios.post('http://localhost:3001/retraerPerfiles', {
+            id_usuario: username,
+        }).then((response) => {
+            // setNombrePlanes(response.data.map(m => m.nombre))
+            // console.log(response.data.map(m => m.nombre));
+            setnombresperfiles(response.data.map(m => {
+
+                return { value: m.nombre, label: m.nombre }
+                // { value: 'react', label: 'React' },
+
+            }))
+        });
+
         window.addEventListener('wheel', handleScroll);
         return () => {
             window.removeEventListener("wheel", handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        console.log(value_select);
+        // window.location.reload(false);
+        if (value_select != '') {
+            navigate(`/home/${username}/${value_select}`);
+            window.location.reload(false);
+        }
+        // navigate(`/home/${username}/${value_select}`);
+
+    }, [value_select]);
 
 
     return (
@@ -32,7 +61,14 @@ const Nav = () => {
                 <h4>Favorites</h4>
             </div>
             <Search id='searchNav' onClick={() => { navigate(`/home/search/${username}/${profile}`) }} style={{ color: "white", fontSize: '35', objectFit: "contain" }} />
-            <TagFaces id='avatarNav' style={{ borderRadius: "4px", background: "#ffba08", color: "white", fontSize: '35', objectFit: "contain" }} />
+            <Select
+                value={value_select}
+                placeholder={profile}
+                data={nombresperfiles}
+                onChange={setValueSelect}
+                id='avatarNav'
+            />
+            {/* <TagFaces id='avatarNav' style={{ borderRadius: "4px", background: "#ffba08", color: "white", fontSize: '35', objectFit: "contain" }} /> */}
         </div>
     )
 }
