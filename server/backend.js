@@ -204,6 +204,16 @@ app.post("/agregarFallido", (req, res) => {
     )
 })
 
+app.post("/modLogin", (req, res) => {
+    const id = req.body.id
+    con.query(
+        `update usuarios set ultimo_login = NOW() where id_usuario = ?`, [id],
+        function (error, resultado) {
+            console.log("Dato ingresado")
+        }
+    )
+})
+
 app.post("/retraerAdmin", (req, res) => {
     const n = req.body.u_temp
     const c = req.body.c_temp

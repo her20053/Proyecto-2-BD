@@ -257,6 +257,20 @@ app.post('/admin_tools_modificar_usuario', (req, res) => {
 
 })
 
+app.get("/retraerTopGeneros", (req, res) => {
+    con.query('SELECT g.nombre_genero,sum(p.duracion) as duracion from generos g join generos_pelicula gp on(g.id_genero=gp.id_genero) join peliculas p on(gp.id_pelicula=p.id_pelicula) join peliculas_vistas pv on(p.id_pelicula=pv.id_pelicula) GROUP BY g.nombre_genero ORDER BY duracion DESC LIMIT 7',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.get("/retraerCantidad", (req, res) => {
+    con.query('SELECT g.nombre_genero, count(pv.id_pelicula) as reproducciones, s.id_plan from generos g join generos_pelicula gp on(g.id_genero = gp.id_genero) join peliculas p on(gp.id_pelicula = p.id_pelicula) join peliculas_vistas pv on(p.id_pelicula = pv.id_pelicula) join perfiles p2 on(pv.id_perfil = p2.id_perfil) join suscripciones s on(p2.id_usuario = s.id_usuario) GROUP BY g.nombre_genero, s.id_plan, g.nombre_genero ORDER BY reproducciones DESC LIMIT 10',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
 
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)

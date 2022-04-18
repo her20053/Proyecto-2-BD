@@ -27,6 +27,13 @@ const Login = () => {
                 else {
                     if (bcrypt.compareSync(clav, data[0].contrasena)) {
                         navigate(`/Profile/` + data[0].id_usuario)
+                        const id = data[0].id_usuario
+                        fetch('http://localhost:3001/modLogin',
+                            {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id })
+                            })
                     }
                     else {
                         alert("Usuario o clave incorrectos, intente de nuevo...")

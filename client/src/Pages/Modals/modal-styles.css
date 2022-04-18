@@ -149,3 +149,14 @@ input {
     border-radius: 5px;
     color: black;
 }
+
+#infoTop {
+    position: relative;
+    top: 20px;
+    padding: 10px 0;
+    text-align: justify;
+    color: white;
+    font-family: roboto;
+    font-size: 16px;
+    font-weight: 500;
+}
