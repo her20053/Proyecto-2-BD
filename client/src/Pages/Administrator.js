@@ -11,6 +11,7 @@ import ModalModificarPelicula from './Modals/modificar-pelicula-folder/ModalModi
 import ModalCorregirPelicula from './Modals/corregir-pelicula-folder/ModalCorregirPelicula'
 import ModalAgregarAnunciante from './Modals/agregar-anunciante-folder/ModalAgregarAnunciante'
 import ModalEliminarAnunciante from './Modals/eliminar-anunciante-folder/ModalEliminarAnunciante'
+import ModalAgregarUsuario from './Modals/Agregar-usuario/ModalAgregarUsuario'
 
 
 
@@ -25,6 +26,7 @@ const Administrator = () => {
     const [modal_mcp, setmodal_mcp] = useState(false);
     const [modal_maa, setmodal_maa] = useState(false);
     const [modal_mea, setmodal_mea] = useState(false);
+    const [modal_agu,setmodal_agu] = useState(false);
 
 
     return (
@@ -36,6 +38,7 @@ const Administrator = () => {
             {modal_mcp && <ModalCorregirPelicula cerrarModal={setmodal_mcp} />}
             {modal_maa && <ModalAgregarAnunciante cerrarModal={setmodal_maa} />}
             {modal_mea && <ModalEliminarAnunciante cerrarModal={setmodal_mea} />}
+            {modal_agu && <ModalAgregarUsuario cerrarModal={setmodal_agu}/>}
 
             <div className='contenido-admin'>
                 <div className='caja-opciones-admin'>
@@ -48,7 +51,7 @@ const Administrator = () => {
                 </div>
                 <div className='caja-opciones-admin'>
                     <h1>Herramientas de usuarios</h1>
-                    <button id="raise">Agregar usuario</button>
+                    <button id="raise" onClick={() => {setmodal_agu(true); }}>Agregar usuario</button>
                     <button id="raise">Modificar usuario</button>
                     <button id="raise">Corregir direccion de usuario</button>
                     <button id="raise">Desactivar perfil</button>

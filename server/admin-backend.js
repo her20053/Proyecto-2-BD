@@ -153,6 +153,33 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
     }
 
 })
+app.post("/admin_agregar_usuario", (req, res) => {
+
+    // nombre_persona, correo, lugar, contrasena
+
+    var today = new Date();
+    let fecha_inicio = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const ultimo_log = fecha_inicio;
+    const nombre = req.body.nombre_persona;
+    const correo = req.body.correo;
+    const clave = req.body.contrasena;
+    const lugar = req.body.lugar;
+    const id = req.body.id;
+
+    con.connect(function (err) {
+
+        console.log("Conectado")
+
+        con.query(
+            // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
+            `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?)`, [id, nombre, correo, lugar, clave, lugar, ultimo_log],
+            function (error, resultado) {
+                console.log("Se ingreso el usuario con exito")
+            }
+        )
+    })
+})
 
 app.post('/admin_agregar_anunciante', (req, res) => {
     const id_anunciante = 'an' + Math.floor(Math.random() * 100000);

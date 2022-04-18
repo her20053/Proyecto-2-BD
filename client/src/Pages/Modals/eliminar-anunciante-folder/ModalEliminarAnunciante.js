@@ -7,7 +7,24 @@ function ModalEliminarAnunciante({ cerrarModal }) {
     const [anunciante, setanunciante] = useState('');
 
     const handleClick = () => {
-        console.log("Hola");
+        const id_anunciante = anunciante;
+
+        fetch('http://localhost:3010/admin_eliminar_anunciante', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id_anunciante}),
+        })
+            .then(response => {
+                return response.text();
+            })
+            .then(data => {
+                alert(data);
+                // getUsuarios();
+            });
+
+        cerrarModal(false)
     }
 
     return (
