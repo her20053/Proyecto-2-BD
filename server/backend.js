@@ -193,6 +193,17 @@ app.post("/retraerUsuarios", (req, res) => {
     )
 })
 
+app.post("/agregarFallido", (req, res) => {
+    const n = req.body.u_temp
+    const id = 'if' + Math.floor(Math.random() * 100000);
+    con.query(
+        `INSERT INTO intentos_fallidos VALUES(?, ?, NOW())`, [id, n],
+        function (error, resultado) {
+            console.log("Dato ingresado")
+        }
+    )
+})
+
 app.post("/retraerAdmin", (req, res) => {
     const n = req.body.u_temp
     const c = req.body.c_temp
@@ -259,22 +270,22 @@ app.post("/retraerIdPerfil", (req, res) => {
         }
     )
 })
-app.post("/retraerpeli",(req,res)=>{
-    const id_peli=req.body.id_pelicula
+app.post("/retraerpeli", (req, res) => {
+    const id_peli = req.body.id_pelicula
     con.query(
-        `SELECT * FROM peliculas WHERE id_pelicula=?`,[id_peli],
-        (err,result) =>{
+        `SELECT * FROM peliculas WHERE id_pelicula=?`, [id_peli],
+        (err, result) => {
             console.log(result)
             console.log(id_peli)
-            if(err){
+            if (err) {
                 console.log("Hubo un error")
-                res.send({error:err})
+                res.send({ error: err })
             }
-            if(result.length>0){
+            if (result.length > 0) {
                 res.send(result);
             }
-            else{
-                res.send({mensaje_error: 'No existe una pelicula con ese id'})
+            else {
+                res.send({ mensaje_error: 'No existe una pelicula con ese id' })
             }
         }
     )
@@ -314,7 +325,7 @@ app.post("/retraerpelisearch", (req, res) => {
         join memflixdatabase.actores_pelicula ac on(p.id_pelicula=ac.id_pelicula)
         join memflixdatabase.actores a on(ac.id_actor=a.id_actor)
         where p.titulo=? or pre.nombre_premio=? or dr.nombre=? or a.nombre=?`,
-        [input,input,input,input],
+        [input, input, input, input],
         (err, result) => {
 
             console.log(result)

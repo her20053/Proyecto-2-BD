@@ -15,52 +15,59 @@ const Login = () => {
         const c_temp = clav
 
         fetch('http://localhost:3001/retraerUsuarios',
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ u_temp, c_temp })
-        }).then((response) => response.json())
-        .then((data) => {
-            if(data.mensaje_error){
-                console.log(data.mensaje_error)
-            }
-            else{
-                if(bcrypt.compareSync(clav, data[0].contrasena)){
-                    navigate(`/Profile/` + data[0].id_usuario)
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ u_temp, c_temp })
+            }).then((response) => response.json())
+            .then((data) => {
+                if (data.mensaje_error) {
+                    console.log(data.mensaje_error)
                 }
-                else{
-                    alert("Usuario o clave incorrectos, intente de nuevo...")
-                }
-                // console.log(data[0].id_usuario)
-            }
+                else {
+                    if (bcrypt.compareSync(clav, data[0].contrasena)) {
+                        navigate(`/Profile/` + data[0].id_usuario)
+                    }
+                    else {
+                        alert("Usuario o clave incorrectos, intente de nuevo...")
+                        fetch('http://localhost:3001/agregarFallido',
+                            {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ u_temp })
+                            })
 
-        })
+                    }
+                    // console.log(data[0].id_usuario)
+                }
+
+            })
 
     }
 
-    return(
-    <div className="Login">
-    <h1 onClick={() => { navigate("/") }} id="titulo">MEMEFLIX</h1>
-    <div className='box' id='loginForm'>
-        <h1>Login</h1>
-        <div className='inputs'>
-            <input
-                type="text"
-                placeholder="Correo Electrónico"
-                id="email_login"
-                onInput = {(e) => setUsua(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Contraseña"
-                id="password_login"
-                onInput = {(e) => setClav(e.target.value)}
-            />
-            <button onClick={retraerUsuario}>Login</button>
+    return (
+        <div className="Login">
+            <h1 onClick={() => { navigate("/") }} id="titulo">MEMEFLIX</h1>
+            <div className='box' id='loginForm'>
+                <h1>Login</h1>
+                <div className='inputs'>
+                    <input
+                        type="text"
+                        placeholder="Correo Electrónico"
+                        id="email_login"
+                        onInput={(e) => setUsua(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        id="password_login"
+                        onInput={(e) => setClav(e.target.value)}
+                    />
+                    <button onClick={retraerUsuario}>Login</button>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-    ) 
+    )
 
 }
 

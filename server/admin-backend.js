@@ -155,7 +155,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
 })
 
 app.post('/admin_agregar_anunciante', (req, res) => {
-    const id_anunciante = req.body.id_anunciante
+    const id_anunciante = 'an' + Math.floor(Math.random() * 100000);
     const nombre = req.body.nombre
     const mensaje = req.body.mensaje
     con.query(
