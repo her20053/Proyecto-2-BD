@@ -6,6 +6,8 @@ import Nav from './Nav';
 import Axios from 'axios';
 import { AllInboxOutlined } from '@material-ui/icons';
 
+import ModalAnuncio from './Modals/ANUNCIO/ModalAnuncio'
+
 const Home = () => {
 
     let { username } = useParams();
@@ -14,7 +16,10 @@ const Home = () => {
     const base_url = "https://image.tmdb.org/t/p/original/";
     const [watched, setWatched] = useState([]);
     const [idPerfil, setIdPerfil] = useState("pe7315");
-    const [hayWatched, setHayWatched] = useState(false)
+    const [hayWatched, setHayWatched] = useState(false);
+
+    const [modal_anuncio, setmodal_anuncio] = useState(false);
+    const [anuncio, set_anuncio] = useState({})
 
     useEffect(() => {
         Axios.post('http://localhost:3001/retraerIdPerfil', {
@@ -23,6 +28,13 @@ const Home = () => {
         }).then((response) => {
             // console.log(response.data[0].id_perfil);
             setIdPerfil(response.data[0].id_perfil);
+        });
+        Axios.post('http://localhost:3001/retraerPlan', {
+            id_usuario: username,
+        }).then((response) => {
+            if (response.data[0].id_plan == 'pl1') {
+                setmodal_anuncio(true);
+            }
         });
     }, [])
 
@@ -36,16 +48,35 @@ const Home = () => {
 
     }, [idPerfil])
 
+    useEffect(() => {
+        getAnuncios()
+        // console.log("Se cerro modal");
+        setInterval(() => {
+            setmodal_anuncio(true);
+        }, 900000)
+    }, [modal_anuncio])
+
 
     useEffect(() => {
-        console.log(watched, "USEEFFECT")
+        // console.log(watched, "USEEFFECT")
         if (watched.length > 0) {
             setHayWatched(true);
         } else {
             setHayWatched(false);
         }
-        console.log(hayWatched)
+        // console.log(hayWatched)
     }, [watched])
+
+    const getAnuncios = () => {
+
+        // http://localhost:3001
+        Axios.get('http://localhost:3001/retraerAnuncios').then((respuesta_anuncios) => {
+            const arr_temp = respuesta_anuncios.data
+            // console.log(arr_temp[Math.floor(Math.random() * arr_temp.length)]);
+            set_anuncio(arr_temp[Math.floor(Math.random() * arr_temp.length)])
+        })
+
+    }
 
     const handleClick = () => {
 
@@ -57,6 +88,8 @@ const Home = () => {
             <Nav />
 
             <Banner />
+
+            {modal_anuncio && <ModalAnuncio cerrarModal={setmodal_anuncio} datos_anuncio={anuncio} />}
 
             <div className='fila'>
                 <Filas title="Memeflix Originals" isLargeRow />

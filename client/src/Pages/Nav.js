@@ -7,7 +7,7 @@ const Nav = () => {
     let { username } = useParams();
     let { profile } = useParams();
     const [show, handleShow] = useState(false);
-    console.log(username)
+    // console.log(username)
 
     const handleScroll = () => {
         // console.log(window.scrollY)

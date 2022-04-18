@@ -259,22 +259,22 @@ app.post("/retraerIdPerfil", (req, res) => {
         }
     )
 })
-app.post("/retraerpeli",(req,res)=>{
-    const id_peli=req.body.id_pelicula
+app.post("/retraerpeli", (req, res) => {
+    const id_peli = req.body.id_pelicula
     con.query(
-        `SELECT * FROM peliculas WHERE id_pelicula=?`,[id_peli],
-        (err,result) =>{
+        `SELECT * FROM peliculas WHERE id_pelicula=?`, [id_peli],
+        (err, result) => {
             console.log(result)
             console.log(id_peli)
-            if(err){
+            if (err) {
                 console.log("Hubo un error")
-                res.send({error:err})
+                res.send({ error: err })
             }
-            if(result.length>0){
+            if (result.length > 0) {
                 res.send(result);
             }
-            else{
-                res.send({mensaje_error: 'No existe una pelicula con ese id'})
+            else {
+                res.send({ mensaje_error: 'No existe una pelicula con ese id' })
             }
         }
     )
@@ -314,7 +314,7 @@ app.post("/retraerpelisearch", (req, res) => {
         join memflixdatabase.actores_pelicula ac on(p.id_pelicula=ac.id_pelicula)
         join memflixdatabase.actores a on(ac.id_actor=a.id_actor)
         where p.titulo=? or pre.nombre_premio=? or dr.nombre=? or a.nombre=?`,
-        [input,input,input,input],
+        [input, input, input, input],
         (err, result) => {
 
             console.log(result)
@@ -332,6 +332,17 @@ app.post("/retraerpelisearch", (req, res) => {
         }
     )
 })
+
+
+app.get("/retraerAnuncios", (req, res) => {
+    console.log("Se estan retrayendo anunciantes")
+    con.query('SELECT * FROM anunciante',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+
 
 app.listen(3001, () => {
     console.log('App corriendo en el puerto 3001')
