@@ -55,7 +55,7 @@ const Nav = () => {
     }, [value_select]);
 
     const handleClickPlan = () => {
-        navigate(`/plan/${username}`);
+        navigate(`/updateplan/${username}`);
     }
     const handleClickLogout = () => {
         navigate('/login')
