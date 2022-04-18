@@ -271,6 +271,37 @@ app.get("/retraerCantidad", (req, res) => {
         })
 })
 
+app.get("/retraerActores", (req, res) => {
+    con.query(`SELECT ac.nombre,count(pv.id_pelicula) as reproducciones,s.id_plan
+    FROM actores ac
+    join actores_pelicula ap on ac.id_actor = ap.id_actor
+    join peliculas p on ap.id_pelicula = p.id_pelicula
+    join peliculas_vistas pv on p.id_pelicula = pv.id_pelicula
+    join perfiles p2 on pv.id_perfil = p2.id_perfil
+    join suscripciones s on p2.id_usuario = s.id_usuario
+    where s.id_plan='pl2' or s.id_plan='pl3'
+    GROUP BY ac.nombre, s.id_plan
+    ORDER BY reproducciones DESC limit 10`,
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.get("/retraerDirectores", (req, res) => {
+    con.query(`SELECT di.nombre,count(pv.id_pelicula) as reproducciones,s.id_plan
+    FROM directores di
+    join peliculas p on di.id_pelicula = p.id_pelicula
+    join peliculas_vistas pv on p.id_pelicula = pv.id_pelicula
+    join perfiles p2 on pv.id_perfil = p2.id_perfil
+    join suscripciones s on p2.id_usuario = s.id_usuario
+    where s.id_plan='pl2' or s.id_plan='pl3'
+    GROUP BY di.nombre, s.id_plan
+    ORDER BY reproducciones DESC limit 10`,
+        (err, result) => {
+            res.send(result);
+        })
+})
+
 
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)

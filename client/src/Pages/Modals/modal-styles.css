@@ -160,3 +160,10 @@ input {
     font-size: 16px;
     font-weight: 500;
 }
+
+.gridTopAcDic {
+    position: absolute;
+    left: -70px;
+    display: flex;
+    width: 950px;
+}
