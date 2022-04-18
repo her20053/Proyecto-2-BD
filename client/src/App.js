@@ -8,7 +8,7 @@ import AddProfile from './Pages/AddProfile';
 import Planes from './Pages/Planes';
 import Home from './Pages/Home';
 import ErrorPage from './Pages/ErrorPage';
-import  Search  from "./Pages/search";
+import Search from "./Pages/search";
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
           <Route path='/administrator/:username' element={<Administrator />} />
           <Route path='/addprofile/:username' element={<AddProfile />} />
           <Route path='/home/:username/:profile' element={<Home />} />
-          <Route path="/home/search" element={<Search/>}></Route>
+          <Route path="/home/search/:username/:profile" element={<Search />}></Route>
           <Route path="*" element={<ErrorPage />} />
           {/*Esta debe de ser la ultima ruta siempre */}
         </Routes>

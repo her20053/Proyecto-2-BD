@@ -54,7 +54,7 @@ const Home = () => {
     return (
         <div className='Home'>
 
-            <Nav/>
+            <Nav />
 
             <Banner />
 
@@ -62,20 +62,20 @@ const Home = () => {
                 <Filas title="Memeflix Originals" isLargeRow />
                 <Filas title="Trending now" />
                 {
-                    hayWatched ?
-                        <div>
-                            <h1 className='tituloFilas' style={{ marginLeft: '40px' }}>Watch Again</h1>
-                            <div className='filas_posters'>
-                                {watched.map(watched => (
-                                    <img
-                                        key={watched.id_pelicula}
-                                        onClick={() => handleClick(watched)}
-                                        className={`posters ${false && "posterGrande"}`}
-                                        src={`${base_url}${false ? watched.poster_path : watched.backdrop_path}`}
-                                        alt={watched.titulo} />
-                                ))}
-                            </div>
-                        </div> : null
+                    (watched.length > 0) &&
+                    <div>
+                        <h1 className='tituloFilas' style={{ marginLeft: '40px' }}>Watch Again</h1>
+                        <div className='filas_posters'>
+                            {watched.map(watched => (
+                                <img
+                                    key={watched.id_pelicula}
+                                    onClick={() => handleClick(watched)}
+                                    className={`posters ${false && "posterGrande"}`}
+                                    src={`${base_url}${false ? watched.poster_path : watched.backdrop_path}`}
+                                    alt={watched.titulo} />
+                            ))}
+                        </div>
+                    </div>
                 }
             </div>
 

@@ -880,10 +880,10 @@ h2#titulo {
 .gridNav {
   position: fixed;
   top: 10px;
-  width: 300px;
+  width: 150px;
   left: 210px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   cursor: pointer;
 }
 

@@ -13,30 +13,30 @@ const Prueba2 = ({ title, isLargeRow }) => {
     const [peliculas, setPeliculas] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const [idPerfil, setIdPerfil] = useState("");
-    const[info,setinfo]=useState([]);
-    const[click,setclick]=useState(false);
-    const[input,setinput]=useState("")
-    const[haypelis,sethaypelis]=useState(true);
+    const [info, setinfo] = useState([]);
+    const [click, setclick] = useState(false);
+    const [input, setinput] = useState("")
+    const [haypelis, sethaypelis] = useState(true);
 
-    function ingresarpelicula(){
+    function ingresarpelicula() {
         let input_usuario = document.getElementById('search_input').value;
         retraerpeliculas1(input_usuario);
         console.log(input_usuario)
     }
-    
+
     const retraerpeliculas1 = async (dato_ingresado_parametro) => {
         const dato_ingresado = dato_ingresado_parametro
         fetch('http://localhost:3001/retraerpelisearch',
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ dato_ingresado})
-        }).then((response) => response.json())
-        .then((data) => {
-            setPeliculas(data)
-            haypelisf()
-            console.log(haypelis)
-        })
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ dato_ingresado })
+            }).then((response) => response.json())
+            .then((data) => {
+                setPeliculas(data)
+                haypelisf()
+                console.log(haypelis)
+            })
     }
 
     // useEffect(() => {
@@ -91,14 +91,14 @@ const Prueba2 = ({ title, isLargeRow }) => {
         const id_pelicula = id_pelicula_parametro
 
         fetch('http://localhost:3001/retraerpeli',
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_pelicula})
-        }).then((response) => response.json())
-        .then((data) => {
-            setinfo(data[0])
-        })
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_pelicula })
+            }).then((response) => response.json())
+            .then((data) => {
+                setinfo(data[0])
+            })
     }
 
 
@@ -119,10 +119,10 @@ const Prueba2 = ({ title, isLargeRow }) => {
                 }).catch(error => console.log(error))
         }
     }
-    function haypelisf(){
-        if(peliculas.length >0){
+    function haypelisf() {
+        if (peliculas.length > 0) {
             sethaypelis(true)
-        }else{
+        } else {
             sethaypelis(false)
         }
     }
@@ -134,35 +134,39 @@ const Prueba2 = ({ title, isLargeRow }) => {
                     type="text"
                     placeholder="Buscar"
                     id="search_input"
-                    onInput = {(e) => setinput(e.target.value)}
+                    onInput={(e) => setinput(e.target.value)}
                 />
                 <button className='button_search' onClick={ingresarpelicula}>Buscar</button>
             </div>
-            <h1 className='tituloFilas'>{title}</h1> 
+            <h1 className='tituloFilas'>{title}</h1>
             <div className="filas_posters">
-                {peliculas.map(pelicula => (
-                    <div> 
-                        <img
-                            key={pelicula.id_pelicula}
-                            onClick={() => handleClick(pelicula)}
-                            className={`posters ${isLargeRow && "posterGrande"}`}
-                            src={`${base_url}${isLargeRow ? pelicula.poster_path : pelicula.backdrop_path}`}
-                            alt={pelicula.titulo} />
-                        
-                    </div>
+                {((peliculas.length > 0) ?
+                    peliculas.map(pelicula => (
+                        <div>
+                            <img
+                                key={pelicula.id_pelicula}
+                                onClick={() => handleClick(pelicula)}
+                                className={`posters ${isLargeRow && "posterGrande"}`}
+                                src={`${base_url}${isLargeRow ? pelicula.poster_path : pelicula.backdrop_path}`}
+                                alt={pelicula.titulo} />
+
+                        </div>
 
 
-                ))}
+                    )
+                    ) : <h2>No hay match para su busqueda.</h2>
+                )
+                }
             </div>
             {click && info && <div className='barrainfo'>
                 <div className='contendor_img'>
-                    <img className='img_info' src={`${base_url}${info.backdrop_path}`} alt={info.titulo}/>
+                    <img className='img_info' src={`${base_url}${info.backdrop_path}`} alt={info.titulo} />
                 </div>
                 <h1 className='titulopeli'>{info.titulo}</h1>
                 <div className='infopeli'>{info.resumen}</div>
                 <button className='button_vd'>+</button>
             </div>}
-            
+
             {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
         </div>
     )
