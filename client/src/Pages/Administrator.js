@@ -15,7 +15,7 @@ import ModalAgregarUsuario from './Modals/Agregar-usuario/ModalAgregarUsuario'
 import ModalModificarUsuario from './Modals/modificar-usuario-folder/modificarUsuario'
 import TopGenerosVistos from './Modals/top-generos-vistos-folder/topGenerosVistos'
 import CantidadCategoria from './Modals/cantidad-categoria-folder/cantidadCategoria'
-
+import TopActDic from './Modals/topActDic-folder/topActDic'
 
 
 const Administrator = () => {
@@ -33,6 +33,7 @@ const Administrator = () => {
     const [modal_mmu, setmodal_mmu] = useState(false);
     const [modal_top, setmodal_top] = useState(false);
     const [modal_cat, setmodal_cat] = useState(false);
+    const [modal_act, setmodal_act] = useState(false);
 
 
     return (
@@ -48,6 +49,7 @@ const Administrator = () => {
             {modal_mmu && <ModalModificarUsuario cerrarModal={setmodal_mmu} />}
             {modal_top && <TopGenerosVistos cerrarModal={setmodal_top} />}
             {modal_cat && <CantidadCategoria cerrarModal={setmodal_cat} />}
+            {modal_act && <TopActDic cerrarModal={setmodal_act} />}
 
             <div className='contenido-admin'>
                 <div className='caja-opciones-admin'>
@@ -70,7 +72,7 @@ const Administrator = () => {
                     <h1>Reportes e info de peliculas</h1>
                     <button id="raise" onClick={() => { setmodal_top(true); }}>Los 10 generos mas vistos</button>
                     <button id="raise" onClick={() => { setmodal_cat(true); }}>Cantidad de reproducciones por categoria</button>
-                    <button id="raise">Top 10 actores y directores</button>
+                    <button id="raise" onClick={() => { setmodal_act(true); }}>Top 10 actores y directores</button>
                     <button id="raise">Cantidad de cuentas avanzadas en 6 meses</button>
                     <button id="raise">Fecha especifica, ¿cual es la hora pico?</button>
                 </div>
