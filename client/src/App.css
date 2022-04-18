@@ -870,10 +870,16 @@ h2#titulo {
   width: 170px;
 }
 
+#navMenuOptions {
+  position: fixed;
+  top: 12px;
+  right: 200px;
+}
+
 #searchNav {
   position: fixed;
   top: 14px;
-  right: 200px;
+  right: 320px;
   cursor: pointer;
 }
 

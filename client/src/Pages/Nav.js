@@ -3,6 +3,8 @@ import { TagFaces, Search } from '@material-ui/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Select } from '@mantine/core';
 import Axios from 'axios';
+import { Menu, Divider, Text, Button } from '@mantine/core';
+import { Settings, Photo, MessageCircle, Trash, ArrowsLeftRight } from 'tabler-icons-react';
 
 const Nav = () => {
     let navigate = useNavigate();
@@ -52,6 +54,14 @@ const Nav = () => {
 
     }, [value_select]);
 
+    const handleClickPlan = () => {
+        navigate(`/plan/${username}`);
+    }
+    const handleClickLogout = () => {
+        navigate('/login')
+    }
+
+
 
     return (
         <div className={`Nav ${show && "Nav_black"}`}>
@@ -61,6 +71,18 @@ const Nav = () => {
                 <h4>Favorites</h4>
             </div>
             <Search id='searchNav' onClick={() => { navigate(`/home/search/${username}/${profile}`) }} style={{ color: "white", fontSize: '35', objectFit: "contain" }} />
+            <Menu gutter={1} position="right" id='navMenuOptions' control={<Button color="yellow">Opciones</Button>}>
+                <Menu.Label>Cuenta</Menu.Label>
+                <Menu.Item
+                    icon={<MessageCircle size={14} />}
+                    onClick={handleClickPlan}
+                >Cambiar plan</Menu.Item>
+                <Menu.Item
+                    color="red"
+                    icon={<ArrowsLeftRight size={14} />}
+                    onClick={handleClickLogout}
+                >Logout</Menu.Item>
+            </Menu>
             <Select
                 value={value_select}
                 placeholder={profile}
