@@ -1,5 +1,5 @@
 .caja-modal {
-    position: absolute;
+    position: relative;
     width: 600px;
     height: 70%;
     padding: 50px;

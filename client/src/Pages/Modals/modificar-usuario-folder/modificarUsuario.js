@@ -2,23 +2,26 @@ import React from 'react'
 import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 
-function ModalCorregirPelicula({ cerrarModal }) {
+function ModalModificarPelicula({ cerrarModal }) {
 
-    const [idp, setidp] = useState('');
+    const [idu, setidu] = useState('');
 
     const [nuevovalor, setnuevovalor] = useState();
 
     const [area, setarea] = useState();
 
     const handleClick = () => {
-        fetch('http://localhost:3010/admin_tools_modificar_pelicula',
+
+        fetch('http://localhost:3010/admin_tools_modificar_usuario',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idp, nuevovalor, area })
+                body: JSON.stringify({ idu, nuevovalor, area })
             }).then((response) => response.json())
 
         cerrarModal(false)
+        console.log(area)
+
     }
 
     return (
@@ -31,18 +34,14 @@ function ModalCorregirPelicula({ cerrarModal }) {
                         onClick={() => cerrarModal(false)}>Cerrar</button>
                 </div>
                 <div className="area-info-modal">
-                    <h1>Corregir pelicula</h1>
-                    <select onChange={(e) => setarea(e.target.value)}>
-                        <option value="backdrop_path">backdrop_path</option>
-                        <option value="duracion">duracion</option>
-                        <option selected value="fecha_estreno">fecha_estreno</option>
-                        <option value="poster_path">poster_path</option>
-                        <option value="rating">rating</option>
-                        <option value="resumen">resumen</option>
-                        <option value="titulo">titulo</option>
-                        <option value="url">url</option>
+                    <h1>Modificar Usuario</h1>
+                    <select
+                        onChange={(e) => setarea(e.target.value)}>
+                        <option value="nombre">nombre</option>
+                        <option value="correo">correo</option>
+                        <option selected value="contrasena">contrasena</option>
                     </select>
-                    <input type="text" onChange={(e) => setidp(e.target.value)} placeholder="id_pelicula" />
+                    <input type="text" onChange={(e) => setidu(e.target.value)} placeholder="id_usuario" />
                     <input type="text" onChange={(e) => setnuevovalor(e.target.value)} placeholder="nuevo valor" />
                 </div>
                 <div className="area-enviar-modal">
@@ -53,4 +52,4 @@ function ModalCorregirPelicula({ cerrarModal }) {
     )
 }
 
-export default ModalCorregirPelicula
+export default ModalModificarPelicula

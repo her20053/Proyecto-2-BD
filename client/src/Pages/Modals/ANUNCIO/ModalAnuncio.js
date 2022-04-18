@@ -9,7 +9,7 @@ function ModalAnuncio({ cerrarModal, datos_anuncio }) {
 
     return (
         <div className="modal-back">
-            <div className="caja-modal">
+            <div className="caja-modal-anuncio">
                 <div className="area-cerrar-modal">
                     <button
                         type="button"

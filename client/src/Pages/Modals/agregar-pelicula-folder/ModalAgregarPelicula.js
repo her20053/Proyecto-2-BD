@@ -26,6 +26,8 @@ function ModalAgregarPelicula({ cerrarModal }) {
             }).then(respuesta_back_end => {
                 console.log(respuesta_back_end)
             })
+
+        cerrarModal(false)
     }
 
     return (

@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const app = express();
+const bcrypt = require('bcryptjs')
 
 const PORT = 3010
 
@@ -203,6 +204,57 @@ app.post('/admin_eliminar_anunciante', (req, res) => {
             console.log("Se elimino anunciante con exito")
         }
     )
+})
+
+app.post('/admin_tools_modificar_usuario', (req, res) => {
+
+
+    const cuerpo = req.body
+    console.log(cuerpo.area)
+    if (cuerpo.area == 'correo') {
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update usuarios set correo = ? WHERE id_usuario = ?`,
+                    [cuerpo.nuevovalor, cuerpo.idu],
+                    function (error_agregar, resultado) {
+                        console.log("Usuario modificada con exito")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+    if (cuerpo.area == 'nombre') {
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update usuarios set nombre_persona = ? WHERE id_usuario = ?`,
+                    [cuerpo.nuevovalor, cuerpo.idu],
+                    function (error_agregar, resultado) {
+                        console.log("Usuario modificada con exito nombre")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+    if (cuerpo.area == 'contrasena') {
+        let contrasena = bcrypt.hashSync(cuerpo.nuevovalor, bcrypt.genSaltSync());
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update usuarios set contrasena = ? WHERE id_usuario = ?`,
+                    [contrasena, cuerpo.idu],
+                    function (error_agregar, resultado) {
+                        console.log("Usuario modificada con exito")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+
 })
 
 
