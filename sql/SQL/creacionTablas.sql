@@ -154,3 +154,9 @@ CREATE TABLE actores_pelicula(
 	FOREIGN KEY(id_actor) REFERENCES actores(id_actor) ON DELETE CASCADE,
 	FOREIGN KEY(id_pelicula) REFERENCES peliculas(id_pelicula) ON DELETE CASCADE
 );
+CREATE TABLE anunciante(
+	id_anunciante VARCHAR(50) PRIMARY KEY,
+	nombre VARCHAR(50),
+	mensaje VARCHAR(200)
+	
+);
