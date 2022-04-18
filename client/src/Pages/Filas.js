@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import movieTrailer from 'movie-trailer';
+import { StarOutline } from '@material-ui/icons';
 
 const Prueba2 = ({ title, isLargeRow }) => {
 
@@ -13,8 +14,8 @@ const Prueba2 = ({ title, isLargeRow }) => {
     const [peliculas, setPeliculas] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const [idPerfil, setIdPerfil] = useState("");
-    const[info,setinfo]=useState([]);
-    const[click,setclick]=useState(false);
+    const [info, setinfo] = useState([]);
+    const [click, setclick] = useState(false);
 
     // useEffect(() => {
     //     async function fetchData() {
@@ -68,14 +69,14 @@ const Prueba2 = ({ title, isLargeRow }) => {
         const id_pelicula = id_pelicula_parametro
 
         fetch('http://localhost:3001/retraerpeli',
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_pelicula})
-        }).then((response) => response.json())
-        .then((data) => {
-            setinfo(data[0])
-        })
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_pelicula })
+            }).then((response) => response.json())
+            .then((data) => {
+                setinfo(data[0])
+            })
     }
 
 
@@ -97,19 +98,29 @@ const Prueba2 = ({ title, isLargeRow }) => {
         }
     }
 
+    async function agregarFavorito(id_pelicula) {
+        // console.log(id_pelicula);
+        Axios.post('http://localhost:3001/sendFavorites', {
+            id_pelicula: id_pelicula,
+            id_perfil: idPerfil,
+        }).then((response) => {
+
+        });
+    }
+
     return (
         <div className='fila'>
             <h1 className='tituloFilas'>{title}</h1>
             <div className="filas_posters">
                 {peliculas.map(pelicula => (
-                    <div> 
+                    <div>
                         <img
                             key={pelicula.id_pelicula}
                             onClick={() => handleClick(pelicula)}
                             className={`posters ${isLargeRow && "posterGrande"}`}
                             src={`${base_url}${isLargeRow ? pelicula.poster_path : pelicula.backdrop_path}`}
                             alt={pelicula.titulo} />
-                        
+
                     </div>
 
 
@@ -117,13 +128,14 @@ const Prueba2 = ({ title, isLargeRow }) => {
             </div>
             {click && info && <div className='barrainfo'>
                 <div className='contendor_img'>
-                    <img className='img_info' src={`${base_url}${info.backdrop_path}`} alt={info.titulo}/>
+                    <img className='img_info' src={`${base_url}${info.backdrop_path}`} alt={info.titulo} />
                 </div>
                 <h1 className='titulopeli'>{info.titulo}</h1>
                 <div className='infopeli'>{info.resumen}</div>
-                <button className='button_vd'>+</button>
+                <StarOutline onClick={() => agregarFavorito(info.id_pelicula)} className='button_vd' style={{ color: "white", fontSize: '45', objectFit: "contain" }} />
+                {/* <button onClick={() => agregarFavorito(info.id_pelicula)} className='button_vd'>+</button> */}
             </div>}
-            
+
             {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
         </div>
     )
