@@ -865,16 +865,15 @@ h2#titulo {
 
 #avatarNav {
   position: fixed;
-  top: 14px;
-  right: 60px;
-  object-fit: contain;
-  cursor: pointer;
+  top: 12px;
+  right: 10px;
+  width: 170px;
 }
 
 #searchNav {
   position: fixed;
   top: 14px;
-  right: 110px;
+  right: 200px;
   cursor: pointer;
 }
 
