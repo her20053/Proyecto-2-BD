@@ -283,6 +283,18 @@ app.post("/sendWatched", (req, res) => {
     )
 })
 
+app.post("/sendFavorites", (req, res) => {
+    const peli = req.body.id_pelicula
+    const id = req.body.id_perfil
+    con.query(
+        `INSERT INTO favoritos VALUES(?,?)`,
+        [id, peli],
+        function (error, resultado) {
+            console.log("Pelicula favorita ingresada")
+        }
+    )
+})
+
 app.post("/retraerIdPerfil", (req, res) => {
     const id_usuario = req.body.id_usuario
     const nombre_perfil = req.body.nombre_perfil
@@ -351,6 +363,30 @@ app.post("/retraerWatched", (req, res) => {
         }
     )
 })
+
+app.post("/retraerFavorites", (req, res) => {
+    const id_perfil = req.body.id_perfil
+    con.query(
+        `select distinct * from peliculas p join favoritos f on (p.id_pelicula = f.id_pelicula) where f.id_perfil = ?`,
+        [id_perfil],
+        (err, result) => {
+
+            console.log(result)
+
+            if (err) {
+                res.send({ error: err })
+            }
+            if (result.length > 0) {
+                res.send(result);
+            }
+            else {
+                res.send({ mensaje_error: 'No hay peliculas vistas' })
+            }
+
+        }
+    )
+})
+
 app.post("/retraerpelisearch", (req, res) => {
     const input = req.body.dato_ingresado
     con.query(

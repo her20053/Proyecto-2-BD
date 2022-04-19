@@ -17,6 +17,7 @@ const Home = () => {
     const [watched, setWatched] = useState([]);
     const [idPerfil, setIdPerfil] = useState("pe7315");
     const [hayWatched, setHayWatched] = useState(false);
+    const [favorites, setFavorites] = useState([]);
 
     const [modal_anuncio, setmodal_anuncio] = useState(false);
     const [anuncio, set_anuncio] = useState({})
@@ -44,6 +45,12 @@ const Home = () => {
             id_perfil: idPerfil,
         }).then((response) => {
             setWatched(response.data);
+        });
+
+        Axios.post('http://localhost:3001/retraerFavorites', {
+            id_perfil: idPerfil,
+        }).then((response) => {
+            setFavorites(response.data);
         });
 
     }, [idPerfil])
@@ -106,6 +113,22 @@ const Home = () => {
                                     className={`posters ${false && "posterGrande"}`}
                                     src={`${base_url}${false ? watched.poster_path : watched.backdrop_path}`}
                                     alt={watched.titulo} />
+                            ))}
+                        </div>
+                    </div>
+                }
+                {
+                    (favorites.length > 0) &&
+                    <div>
+                        <h1 className='tituloFilas' style={{ marginLeft: '40px' }}>Favorites</h1>
+                        <div className='filas_posters'>
+                            {favorites.map(favorites => (
+                                <img
+                                    key={favorites.id_pelicula}
+                                    onClick={() => handleClick(favorites)}
+                                    className={`posters ${false && "posterGrande"}`}
+                                    src={`${base_url}${false ? favorites.poster_path : favorites.backdrop_path}`}
+                                    alt={favorites.titulo} />
                             ))}
                         </div>
                     </div>

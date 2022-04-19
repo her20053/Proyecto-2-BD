@@ -68,7 +68,6 @@ const Nav = () => {
             <h2 onClick={() => { navigate(`/home/${username}/${profile}`) }} id="titulo">MEMEFLIX</h2>
             <div className='gridNav'>
                 <h4 onClick={() => { navigate(`/home/${username}/${profile}`) }} >Home</h4>
-                <h4>Favorites</h4>
             </div>
             <Search id='searchNav' onClick={() => { navigate(`/home/search/${username}/${profile}`) }} style={{ color: "white", fontSize: '35', objectFit: "contain" }} />
             <Menu gutter={1} position="right" id='navMenuOptions' control={<Button color="yellow">Opciones</Button>}>
