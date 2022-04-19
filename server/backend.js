@@ -80,6 +80,32 @@ app.post("/suscripciones", (req, res) => {
     })
 })
 
+app.post("/alterar_plan_suscripciones", (req, res) => {
+
+    // nombre_persona, correo, lugar, contrasena
+
+    const id_usuario = req.body.id_usuario
+    const id_plan = req.body.id_plan
+
+    // update suscripciones
+    // set id_plan = 'pl3'
+    // where id_usuario = 'u33665';
+
+    con.connect(function (err) {
+
+        console.log("Conectado")
+
+        con.query(
+            // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
+            `UPDATE suscripciones SET id_plan = ? WHERE id_usuario = ?`, [id_plan, id_usuario],
+            function (error, resultado) {
+                console.log("Dato ingresado")
+            }
+        )
+    })
+})
+
+
 app.post("/retraerPlan", (req, res) => {
     const id_usuario = req.body.id_usuario;
 
@@ -362,6 +388,29 @@ app.get("/retraerAnuncios", (req, res) => {
             res.send(result);
         })
 })
+
+
+app.post('/retraer_perfiles_de_usuario', (req, res) => {
+
+    console.log("Se estan retrayendo todos los perfiles de un usuario especifico")
+
+    const id_usuario_temp = req.body.id_usuario_temp
+
+    console.log(`SELECT * FROM perfiles WHERE id_usuario = ?`, [id_usuario_temp]);
+
+    con.query(
+        `SELECT * FROM perfiles WHERE id_usuario = ?`, [id_usuario_temp],
+        (posible_error, resultado_query) => {
+            console.log(resultado_query);
+            res.send(resultado_query)
+        }
+    )
+
+})
+
+
+
+
 
 
 
