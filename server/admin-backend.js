@@ -301,7 +301,14 @@ app.get("/retraerDirectores", (req, res) => {
             res.send(result);
         })
 })
-
+app.get("/retraerCuentaAvanzada", (req, res) => {
+    con.query(`SELECT count(id_plan) as cuentavanzada
+    from suscripciones s
+    where s.fecha_inicio between '2021-10-18' and '2022-04-18' and s.id_plan='pl3'`,
+        (err, result) => {
+            res.send(result);
+        })
+})
 
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)

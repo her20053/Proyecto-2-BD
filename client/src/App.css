@@ -1039,3 +1039,7 @@ button#raise {
   box-shadow: 0 0.5em 0.5em -0.4em white;
   transform: translateY(-0.25em);
 }
+.cantidad_cuentas{
+  text-align: center;
+  font-size: 30px;
+}
