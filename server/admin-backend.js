@@ -309,6 +309,22 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
             res.send(result);
         })
 })
+app.post('/actualizarstatus',(req,res)=>{
+    const id_perfil=req.body.id_perfil
+    con.query(`update perfiles set estatus = 0 WHERE id_perfil = ?`,
+    [id_perfil],
+    function (error_agregar, resultado) {
+        console.log("estatus modificado con exito")
+    })
+})
+app.post('/actualizarstatus1',(req,res)=>{
+    const id_perfil=req.body.id_perfil
+    con.query(`update perfiles set estatus = 1 WHERE id_perfil = ?`,
+    [id_perfil],
+    function (error_agregar, resultado) {
+        console.log("estatus modificado con exito")
+    })
+})
 
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)
