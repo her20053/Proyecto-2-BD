@@ -19,6 +19,7 @@ import TopActDic from './Modals/topActDic-folder/topActDic'
 import CuentaAvanzada from './Modals/CuentaAvanzada/Modal_CuentaAvanzada'
 import Status1 from './Modals/Actualizar-status/ModalActualizarstatus'
 import Status11 from './Modals/ActualizarModals1/Actualizarmodals1'
+import HoraPico from './Modals/HoraPico/HoraPico'
 
 const Administrator = () => {
 
@@ -36,9 +37,10 @@ const Administrator = () => {
     const [modal_top, setmodal_top] = useState(false);
     const [modal_cat, setmodal_cat] = useState(false);
     const [modal_act, setmodal_act] = useState(false);
-    const [modal_cv,setmodal_cv] = useState(false);
-    const [modal_s1,setmodal_s1] = useState(false);
-    const [modal_s11,setmodal_s11] =useState(false);
+    const [modal_cv, setmodal_cv] = useState(false);
+    const [modal_s1, setmodal_s1] = useState(false);
+    const [modal_s11, setmodal_s11] = useState(false);
+    const [modal_hora, setmodal_hora] = useState(false);
 
 
     return (
@@ -55,9 +57,11 @@ const Administrator = () => {
             {modal_top && <TopGenerosVistos cerrarModal={setmodal_top} />}
             {modal_cat && <CantidadCategoria cerrarModal={setmodal_cat} />}
             {modal_act && <TopActDic cerrarModal={setmodal_act} />}
-            {modal_cv && <CuentaAvanzada cerrarModal={setmodal_cv}/>}
-            {modal_s1 && <Status1 cerrarModal={setmodal_s1}/>}
-            {modal_s11 && <Status11 cerrarModal={setmodal_s11}/>}
+            {modal_cv && <CuentaAvanzada cerrarModal={setmodal_cv} />}
+            {modal_s1 && <Status1 cerrarModal={setmodal_s1} />}
+            {modal_s11 && <Status11 cerrarModal={setmodal_s11} />}
+            {modal_hora && <HoraPico cerrarModal={setmodal_hora} />}
+
             <div className='contenido-admin'>
                 <div className='caja-opciones-admin'>
                     <h1>Herramientas de peliculas</h1>
@@ -72,16 +76,16 @@ const Administrator = () => {
                     <button id="raise" onClick={() => { setmodal_agu(true); }}>Agregar usuario</button>
                     <button id="raise" onClick={() => { setmodal_mmu(true); }}>Modificar usuario</button>
                     <button id="raise">Corregir direccion de usuario</button>
-                    <button id="raise" onClick={() => {setmodal_s1(true); }}>Desactivar perfil</button>
-                    <button id="raise" onClick={() => {setmodal_s11(true); }}>Activar perfil</button>
+                    <button id="raise" onClick={() => { setmodal_s1(true); }}>Desactivar perfil</button>
+                    <button id="raise" onClick={() => { setmodal_s11(true); }}>Activar perfil</button>
                 </div>
                 <div className='caja-opciones-admin'>
                     <h1>Reportes e info de peliculas</h1>
                     <button id="raise" onClick={() => { setmodal_top(true); }}>Los 10 generos mas vistos</button>
                     <button id="raise" onClick={() => { setmodal_cat(true); }}>Cantidad de reproducciones por categoria</button>
                     <button id="raise" onClick={() => { setmodal_act(true); }}>Top 10 actores y directores</button>
-                    <button id="raise" onClick={()=>{setmodal_cv(true); }}>Cantidad de cuentas avanzadas en 6 meses</button>
-                    <button id="raise">Fecha especifica, ¿cual es la hora pico?</button>
+                    <button id="raise" onClick={() => { setmodal_cv(true); }}>Cantidad de cuentas avanzadas en 6 meses</button>
+                    <button id="raise"  >Fecha especifica, ¿cual es la hora pico?</button>
                 </div>
             </div>
         </div >

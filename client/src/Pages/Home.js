@@ -60,7 +60,7 @@ const Home = () => {
         // console.log("Se cerro modal");
         setInterval(() => {
             setmodal_anuncio(true);
-        }, 60000)
+        }, 900000)
     }, [modal_anuncio])
 
 
