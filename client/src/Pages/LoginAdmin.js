@@ -25,7 +25,7 @@ const LoginAdmin = () => {
                 }
                 else {
                     if (bcrypt.compareSync(clav, data[0].contrasena)) {
-                        navigate(`/administrator/` + data[0].id_usuario)
+                        navigate(`/administrator/` + data[0].id_admin)
                     }
                     else {
                         alert("Usuario o clave incorrectos, intente de nuevo...")

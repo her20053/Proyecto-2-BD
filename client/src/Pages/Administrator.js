@@ -1,6 +1,7 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react'
+import { Modal, Group } from '@mantine/core';
 
 // Importando todos los modales requeridos para la pagina:
 
@@ -24,7 +25,9 @@ import HoraPico from './Modals/HoraPico/HoraPico'
 const Administrator = () => {
 
     let navigate = useNavigate();
+    let { username } = useParams();
 
+    const [opened, setOpened] = useState(false);
 
     // Columnas de herramientas para peliculas
     const [modal_map, setmodal_map] = useState(false);
@@ -46,6 +49,17 @@ const Administrator = () => {
     return (
         <div className='Admin'>
             <h1 onClick={() => { navigate("/") }} id="titulo">ADMINFLIX</h1>
+            <button className='btnAvanzado'>Opciones Avanzadas</button>
+             <Modal
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Agregar Administrador"
+            >
+                {/* Modal content */}
+            </Modal>
+            {
+                username === 'a002' ? <button onClick={() => setOpened(true)} className='btnAgregarA'>Agregar Admin</button> : null
+            }
 
             {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} />}
             {modal_mmp && <ModalModificarPelicula cerrarModal={setmodal_mmp} />}

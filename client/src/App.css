@@ -645,7 +645,9 @@ p {
 #inicioSesion:hover,
 #btnContinuar:enabled:hover,
 #btnAddCont:enabled:hover,
-#administrador:hover {
+#administrador:hover,
+.btnAgregarA:hover,
+.btnAvanzado:hover {
   background: black;
 }
 
@@ -1042,4 +1044,42 @@ button#raise {
 .cantidad_cuentas{
   text-align: center;
   font-size: 30px;
+}
+
+.btnAgregarA{
+  position: absolute;
+  right: 15rem;
+  top: 1.5rem;
+  border: 0;
+  background: #ffba08;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  border: 3px solid #ffba08;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+  padding: 14px 10px;
+}
+
+.btnAvanzado {
+  position: absolute;
+  right: 2rem;
+  top: 1.5rem;
+  border: 0;
+  background: #ffba08;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  border: 3px solid #ffba08;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+  padding: 14px 10px;
 }
