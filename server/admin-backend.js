@@ -326,6 +326,20 @@ app.post('/actualizarstatus1',(req,res)=>{
     })
 })
 
+app.post('/ingresaradmin',(req,res) => {
+    const idadmin =req.id_admin
+    const nombre = req.nombre
+    const correo = req.correo
+    const lugar_creacion = req.lugar_creacion
+    const contrasena = req.contrasena
+    const ultimo_login = req.ultimo_log
+    con.query(`Insert into administradores values(?,?,?,?,?,?)`,[idadmin,nombre,correo,lugar_creacion,contrasena,ultimo_login]),
+    function(error_agregar,resultado){
+        console.log("Datos ingresados con exito")
+    }
+    
+})
+
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)
 })
