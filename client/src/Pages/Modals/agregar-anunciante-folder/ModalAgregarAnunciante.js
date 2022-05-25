@@ -2,7 +2,7 @@ import React from 'react'
 import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 
-function ModalAgregarAnunciante({ cerrarModal }) {
+function ModalAgregarAnunciante({ cerrarModal, admin }) {
 
     const [anunciante, setanunciante] = useState('');
     const [anuncio, setanuncio] = useState('');
@@ -11,13 +11,15 @@ function ModalAgregarAnunciante({ cerrarModal }) {
 
         const nombre = anunciante;
         const mensaje = anuncio;
+    
+
 
         fetch('http://localhost:3010/admin_agregar_anunciante', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nombre, mensaje }),
+            body: JSON.stringify({ nombre, mensaje, admin }),
         })
             .then(response => {
                 return response.text();

@@ -186,9 +186,10 @@ app.post('/admin_agregar_anunciante', (req, res) => {
     const id_anunciante = 'an' + Math.floor(Math.random() * 100000);
     const nombre = req.body.nombre
     const mensaje = req.body.mensaje
+    const id_admin = req.body.admin
     con.query(
-        `INSERT INTO memflixdatabase.anunciante VALUES(?,?,?)`,
-        [id_anunciante, nombre, mensaje],
+        `INSERT INTO memflixdatabase.anunciante VALUES(?,?,?,?)`,
+        [id_anunciante, nombre, mensaje, id_admin],
         function (err, result) {
             console.log("Anunciante ingreado con exito")
         }

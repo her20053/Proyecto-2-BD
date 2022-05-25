@@ -48,8 +48,10 @@ app.post("/usuarios", (req, res) => {
 
         con.query(
             // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
-            `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?)`, [id, nombre, correo, lugar, clave, lugar, ultimo_log],
+            `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?, NULL)`, [id, nombre, correo, lugar, clave, lugar, ultimo_log],
             function (error, resultado) {
+                console.log(error)
+                console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,?, NULL)`, [id, nombre, correo, lugar, clave, lugar, ultimo_log])
                 console.log("Dato ingresado")
             }
         )
@@ -186,7 +188,7 @@ app.post("/agregarPerfil", (req, res) => {
 
         con.query(
             // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
-            `INSERT INTO perfiles VALUES(?,?,?,?,?)`, [id, id_usuario, nombre, fecha_creacion, estatus],
+            `INSERT INTO perfiles VALUES(?,?,?,?,?, NULL)`, [id, id_usuario, nombre, fecha_creacion, estatus],
             function (error, resultado) {
                 console.log("Dato ingresado")
                 res.send(id);

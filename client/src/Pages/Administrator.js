@@ -100,7 +100,7 @@ const Administrator = () => {
       {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} />}
       {modal_mmp && <ModalModificarPelicula cerrarModal={setmodal_mmp} />}
       {modal_mcp && <ModalCorregirPelicula cerrarModal={setmodal_mcp} />}
-      {modal_maa && <ModalAgregarAnunciante cerrarModal={setmodal_maa} />}
+      {modal_maa && <ModalAgregarAnunciante cerrarModal={setmodal_maa} admin={username} />}
       {modal_mea && <ModalEliminarAnunciante cerrarModal={setmodal_mea} />}
       {modal_agu && <ModalAgregarUsuario cerrarModal={setmodal_agu} />}
       {modal_mmu && <ModalModificarUsuario cerrarModal={setmodal_mmu} />}
