@@ -1,7 +1,9 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react'
-import { Modal, Group } from '@mantine/core';
+import { Modal } from '@mantine/core';
+import { Input } from '@mantine/core';
+import bcrypt from 'bcryptjs'
 
 // Importando todos los modales requeridos para la pagina:
 
@@ -46,6 +48,34 @@ const Administrator = () => {
     const [modal_hora, setmodal_hora] = useState(false);
 
 
+    const [nombre, setNombre] = useState('');
+    const [correo, setCorreo] = useState('');
+    const [lugar, setlugar] = useState('');
+    const [contrasena, setcontrasena] = useState('');
+
+    const handleClick = () => {
+      let id_admin = 'a' + Math.floor(Math.random() * 100000)
+      let nombre_admin = nombre;
+      let correo_admin = correo;
+      let lugar_admin = lugar;
+        let contrasena_admin = bcrypt.hashSync(contrasena, bcrypt.genSaltSync());
+        console.log( JSON.stringify({ id_admin, nombre_admin, correo_admin, lugar_admin, contrasena_admin }))
+      fetch('http://localhost:3010/pruebaInsert', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id_admin, nombre_admin, correo_admin, lugar_admin, contrasena_admin }),
+      })
+        .then(response => {
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+          // getUsuarios();
+        });
+    }
+
     return (
         <div className='Admin'>
             <h1 onClick={() => { navigate("/") }} id="titulo">ADMINFLIX</h1>
@@ -55,7 +85,12 @@ const Administrator = () => {
                 onClose={() => setOpened(false)}
                 title="Agregar Administrador"
             >
-                {/* Modal content */}
+                <Input onInput={(e) => setNombre(e.target.value)} variant="default" placeholder="Nombre" />
+                <Input onInput={(e) => setCorreo(e.target.value)} variant="default" placeholder="Correo" type='email' />
+                <Input onInput={(e) => setlugar(e.target.value)} variant="default" placeholder="Lugar de creacion" />
+                <Input onInput={(e) => setcontrasena(e.target.value)} variant="default" placeholder="Contrasena" type='password' />
+
+                <button onClick={()=>handleClick()}  className="btnAdminAgregado">Agregar</button>
             </Modal>
             {
                 username === 'a002' ? <button onClick={() => setOpened(true)} className='btnAgregarA'>Agregar Admin</button> : null

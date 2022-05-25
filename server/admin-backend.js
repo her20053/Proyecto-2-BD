@@ -326,18 +326,17 @@ app.post('/actualizarstatus1',(req,res)=>{
     })
 })
 
-app.post('/ingresaradmin',(req,res) => {
-    const idadmin =req.id_admin
-    const nombre = req.nombre
-    const correo = req.correo
-    const lugar_creacion = req.lugar_creacion
-    const contrasena = req.contrasena
-    const ultimo_login = req.ultimo_log
-    con.query(`Insert into administradores values(?,?,?,?,?,?)`,[idadmin,nombre,correo,lugar_creacion,contrasena,ultimo_login]),
+app.post('/pruebaInsert', (req, res) => {
+    console.log('hola')
+    const idadmin = req.id_admin
+    const nombre = req.nombre_admin
+    const correo = req.correo_admin
+    const lugar_creacion = req.lugar_admin
+    const contrasena = req.contrasena_admin
+    con.query(`insert into administradores values(?,?,?,?,?,NOW())`,[idadmin,nombre,correo,lugar_creacion,contrasena],
     function(error_agregar,resultado){
         console.log("Datos ingresados con exito")
-    }
-    
+    })
 })
 
 app.listen(PORT, () => {
