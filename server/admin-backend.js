@@ -309,34 +309,36 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
             res.send(result);
         })
 })
-app.post('/actualizarstatus',(req,res)=>{
-    const id_perfil=req.body.id_perfil
+app.post('/actualizarstatus', (req, res) => {
+    const id_perfil = req.body.id_perfil
     con.query(`update perfiles set estatus = 0 WHERE id_perfil = ?`,
-    [id_perfil],
-    function (error_agregar, resultado) {
-        console.log("estatus modificado con exito")
-    })
+        [id_perfil],
+        function (error_agregar, resultado) {
+            console.log("estatus modificado con exito")
+        })
 })
-app.post('/actualizarstatus1',(req,res)=>{
-    const id_perfil=req.body.id_perfil
+app.post('/actualizarstatus1', (req, res) => {
+    const id_perfil = req.body.id_perfil
     con.query(`update perfiles set estatus = 1 WHERE id_perfil = ?`,
-    [id_perfil],
-    function (error_agregar, resultado) {
-        console.log("estatus modificado con exito")
-    })
+        [id_perfil],
+        function (error_agregar, resultado) {
+            console.log("estatus modificado con exito")
+        })
 })
 
 app.post('/pruebaInsert', (req, res) => {
     console.log('hola')
-    const idadmin = req.id_admin
-    const nombre = req.nombre_admin
-    const correo = req.correo_admin
-    const lugar_creacion = req.lugar_admin
-    const contrasena = req.contrasena_admin
-    con.query(`insert into administradores values(?,?,?,?,?,NOW())`,[idadmin,nombre,correo,lugar_creacion,contrasena],
-    function(error_agregar,resultado){
-        console.log("Datos ingresados con exito")
-    })
+    const idadmin = req.body.id_admin
+    const nombre = req.body.nombre_admin
+    const correo = req.body.correo_admin
+    const lugar_creacion = req.body.lugar_admin
+    const contrasena = req.body.contrasena_admin
+    console.log(req)
+    console.log(`insert into administradores values(?,?,?,?,?,NOW())`, [idadmin, nombre, correo, lugar_creacion, contrasena])
+    con.query(`insert into administradores values(?,?,?,?,?,NOW())`, [idadmin, nombre, correo, lugar_creacion, contrasena],
+        function (error_agregar, resultado) {
+            console.log("Datos ingresados con exito")
+        })
 })
 
 app.listen(PORT, () => {
