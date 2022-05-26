@@ -3,7 +3,7 @@ import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 import bcrypt from 'bcryptjs'
 
-function ModalAgregarUsario({ cerrarModal }) {
+function ModalAgregarUsario({ cerrarModal, admin }) {
 
     const [nombreusuario, setnombre] = useState('');
     const [correou, setcorreo] = useState('');
@@ -16,13 +16,14 @@ function ModalAgregarUsario({ cerrarModal }) {
         let correo = correou;
         let lugar=lugarcreacionu
         let contrasena = bcrypt.hashSync(clave, bcrypt.genSaltSync());
-
+        const id_admin = admin
+        console.log(JSON.stringify({ id, nombre_persona, correo, lugar,contrasena, id_admin }))
         fetch('http://localhost:3010/admin_agregar_usuario', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, nombre_persona, correo, lugar,contrasena }),
+        body: JSON.stringify({ id, nombre_persona, correo, lugar,contrasena, id_admin }),
       })
         .then(response => {
             console.log('Se ingreso un usuario correctamente')

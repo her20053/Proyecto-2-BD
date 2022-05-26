@@ -2,7 +2,7 @@ import React from 'react'
 import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 
-function ModalAgregarPelicula({ cerrarModal }) {
+function ModalAgregarPelicula({ cerrarModal, admin }) {
 
     const [bdp, setbdp] = useState('');
     const [drc, setdrc] = useState('');
@@ -16,13 +16,15 @@ function ModalAgregarPelicula({ cerrarModal }) {
 
     const handleClick = () => {
         console.log(JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp }))
+        const id_admin = admin
+        console.log(JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp, id_admin }))
         fetch('http://localhost:3010/admin_tools_agregar_pelicula',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp }),
+                body: JSON.stringify({ idp, tit, rsm, url, drc, fce, rtg, psp, bdp, id_admin }),
             }).then(respuesta_back_end => {
                 console.log(respuesta_back_end)
             })

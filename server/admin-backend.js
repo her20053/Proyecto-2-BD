@@ -24,9 +24,9 @@ app.post('/admin_tools_agregar_pelicula', (req, res) => {
     con.connect(
         function (error) {
             con.query(
-                `insert into peliculas (id_pelicula, titulo, resumen, url, duracion, fecha_estreno, rating, poster_path, backdrop_path)
-                values (?,?,?,?,?,?,?,?,?)`,
-                [cuerpo.idp, cuerpo.tit, cuerpo.rsm, cuerpo.url, cuerpo.drc, cuerpo.fce, cuerpo.rtg, cuerpo.psp, cuerpo.bdp],
+                `insert into peliculas (id_pelicula, titulo, resumen, url, duracion, fecha_estreno, rating, poster_path, backdrop_path, id_administrador)
+                values (?,?,?,?,?,?,?,?,?,?)`,
+                [cuerpo.idp, cuerpo.tit, cuerpo.rsm, cuerpo.url, cuerpo.drc, cuerpo.fce, cuerpo.rtg, cuerpo.psp, cuerpo.bdp, cuerpo.id_admin],
                 function (error_agregar, resultado) {
                     console.log("Pelicula ingresada con exito")
                 }
@@ -165,16 +165,18 @@ app.post("/admin_agregar_usuario", (req, res) => {
     const nombre = req.body.nombre_persona;
     const correo = req.body.correo;
     const clave = req.body.contrasena;
-    const lugar = req.body.lugar;
+    const lugar1 = req.body.lugar;
+    const lugar2 = req.body.lugar;
     const id = req.body.id;
+    const id_admin = req.body.id_admin;
 
     con.connect(function (err) {
-
+    console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,NOW(),?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin])
         console.log("Conectado")
 
         con.query(
             // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
-            `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?)`, [id, nombre, correo, lugar, clave, lugar, ultimo_log],
+            `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?,?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin],
             function (error, resultado) {
                 console.log("Se ingreso el usuario con exito")
             }

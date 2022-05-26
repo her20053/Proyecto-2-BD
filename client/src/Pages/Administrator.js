@@ -97,13 +97,13 @@ const Administrator = () => {
         username === 'a002' ? <button onClick={() => setOpened(true)} className='btnAgregarA'>Agregar Admin</button> : null
       }
 
-      {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} />}
-      {modal_mmp && <ModalModificarPelicula cerrarModal={setmodal_mmp} />}
-      {modal_mcp && <ModalCorregirPelicula cerrarModal={setmodal_mcp} />}
+      {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} admin={username} />}
+      {modal_mmp && <ModalModificarPelicula cerrarModal={setmodal_mmp} admin={username} />}
+      {modal_mcp && <ModalCorregirPelicula cerrarModal={setmodal_mcp} admin={username} />}
       {modal_maa && <ModalAgregarAnunciante cerrarModal={setmodal_maa} admin={username} />}
-      {modal_mea && <ModalEliminarAnunciante cerrarModal={setmodal_mea} />}
-      {modal_agu && <ModalAgregarUsuario cerrarModal={setmodal_agu} />}
-      {modal_mmu && <ModalModificarUsuario cerrarModal={setmodal_mmu} />}
+      {modal_mea && <ModalEliminarAnunciante cerrarModal={setmodal_mea} admin={username} />}
+      {modal_agu && <ModalAgregarUsuario cerrarModal={setmodal_agu} admin={username} />}
+      {modal_mmu && <ModalModificarUsuario cerrarModal={setmodal_mmu} admin={username} />}
       {modal_top && <TopGenerosVistos cerrarModal={setmodal_top} />}
       {modal_cat && <CantidadCategoria cerrarModal={setmodal_cat} />}
       {modal_act && <TopActDic cerrarModal={setmodal_act} />}

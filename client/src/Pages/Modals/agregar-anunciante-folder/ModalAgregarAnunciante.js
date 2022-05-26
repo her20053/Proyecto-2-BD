@@ -1,6 +1,6 @@
 import React from 'react'
 import '../modal-styles.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function ModalAgregarAnunciante({ cerrarModal, admin }) {
 
