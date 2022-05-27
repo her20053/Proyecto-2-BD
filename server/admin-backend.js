@@ -218,8 +218,8 @@ app.post('/admin_tools_modificar_usuario', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update usuarios set correo = ? WHERE id_usuario = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idu],
+                    `update usuarios set correo = ?, id_administrador = ? WHERE id_usuario = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idu],
                     function (error_agregar, resultado) {
                         console.log("Usuario modificada con exito")
                         console.log(resultados)
@@ -232,8 +232,8 @@ app.post('/admin_tools_modificar_usuario', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update usuarios set nombre_persona = ? WHERE id_usuario = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idu],
+                    `update usuarios set nombre_persona = ?, id_administrador = ? WHERE id_usuario = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idu],
                     function (error_agregar, resultado) {
                         console.log("Usuario modificada con exito nombre")
                         console.log(resultados)
@@ -247,8 +247,8 @@ app.post('/admin_tools_modificar_usuario', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update usuarios set contrasena = ? WHERE id_usuario = ?`,
-                    [contrasena, cuerpo.idu],
+                    `update usuarios set contrasena = ?, id_administrador = ? WHERE id_usuario = ?`,
+                    [contrasena, cuerpo.id_admin, cuerpo.idu],
                     function (error_agregar, resultado) {
                         console.log("Usuario modificada con exito")
                         console.log(resultados)
