@@ -2,7 +2,7 @@ import React from 'react'
 import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 
-function ModalCorregirPelicula({ cerrarModal }) {
+function ModalCorregirPelicula({ cerrarModal, admin }) {
 
     const [idp, setidp] = useState('');
 
@@ -10,12 +10,13 @@ function ModalCorregirPelicula({ cerrarModal }) {
 
     const [area, setarea] = useState();
 
+    const id_admin = admin
     const handleClick = () => {
         fetch('http://localhost:3010/admin_tools_modificar_pelicula',
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idp, nuevovalor, area })
+                body: JSON.stringify({ idp, nuevovalor, area,id_admin })
             }).then((response) => response.json())
 
         cerrarModal(false)

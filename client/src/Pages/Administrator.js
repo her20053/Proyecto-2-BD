@@ -108,8 +108,8 @@ const Administrator = () => {
       {modal_cat && <CantidadCategoria cerrarModal={setmodal_cat} />}
       {modal_act && <TopActDic cerrarModal={setmodal_act} />}
       {modal_cv && <CuentaAvanzada cerrarModal={setmodal_cv} />}
-      {modal_s1 && <Status1 cerrarModal={setmodal_s1} />}
-      {modal_s11 && <Status11 cerrarModal={setmodal_s11} />}
+      {modal_s1 && <Status1 cerrarModal={setmodal_s1} admin={username} />}
+      {modal_s11 && <Status11 cerrarModal={setmodal_s11} admin={username} />}
       {modal_hora && <HoraPico cerrarModal={setmodal_hora} />}
 
       <div className='contenido-admin'>

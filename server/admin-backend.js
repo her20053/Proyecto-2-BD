@@ -41,14 +41,14 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
     const cuerpo = req.body
 
     if (cuerpo.area == 'titulo') {
+        console.log(cuerpo.id_admin)
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set titulo = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set titulo = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
-                        console.log(resultados)
                     }
                 )
             }
@@ -58,8 +58,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set resumen = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set resumen = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -72,8 +72,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set url = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set url = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -86,8 +86,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set duracion = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set duracion = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -100,8 +100,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set fecha_estreno = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set fecha_estreno = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -114,8 +114,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set rating = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set rating = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -128,8 +128,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set poster_path = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set poster_path = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -142,8 +142,8 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
         con.connect(
             function (error, resultados) {
                 con.query(
-                    `update peliculas set backdrop_path = ? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.idp],
+                    `update peliculas set backdrop_path = ?, id_administrador=? WHERE id_pelicula = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -314,16 +314,18 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
 })
 app.post('/actualizarstatus', (req, res) => {
     const id_perfil = req.body.id_perfil
-    con.query(`update perfiles set estatus = 0 WHERE id_perfil = ?`,
-        [id_perfil],
+    const id_administrador=req.body.id_perfil
+    con.query(`update perfiles set estatus = 0, id_administrador=? WHERE id_perfil = ?`,
+        [id_administrador,id_perfil],
         function (error_agregar, resultado) {
             console.log("estatus modificado con exito")
         })
 })
 app.post('/actualizarstatus1', (req, res) => {
     const id_perfil = req.body.id_perfil
-    con.query(`update perfiles set estatus = 1 WHERE id_perfil = ?`,
-        [id_perfil],
+    const id_administrador=req.body.id_admin
+    con.query(`update perfiles set estatus = 1, id_administrador=? WHERE id_perfil = ?`,
+        [id_administrador,id_perfil],
         function (error_agregar, resultado) {
             console.log("estatus modificado con exito")
         })

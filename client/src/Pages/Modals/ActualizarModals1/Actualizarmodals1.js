@@ -2,9 +2,10 @@ import React from 'react'
 import '../modal-styles.css'
 import { useState, useEffect } from 'react'
 
-function ModalActualizarstatus1({ cerrarModal }) {
+function ModalActualizarstatus1({ cerrarModal,admin }) {
 
     const [idperf, setidperfil] = useState('');
+    const id_admin = admin
 
     const handleClick = () => {
         const id_perfil=idperf
@@ -13,7 +14,7 @@ function ModalActualizarstatus1({ cerrarModal }) {
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({id_perfil})
+                body: JSON.stringify({id_perfil,id_admin})
             })
         cerrarModal(false)
     }
