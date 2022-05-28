@@ -10,6 +10,7 @@ import Home from './Pages/Home';
 import ErrorPage from './Pages/ErrorPage';
 import Search from "./Pages/search";
 import UpdatePlan from "./Pages/UpdatePlan";
+import Advanced from "./Pages/Advanced";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/loginadmin" element={<LoginAdmin />} />
           <Route path='/profile/:username' element={<Profile />} />
           <Route path='/administrator/:username' element={<Administrator />} />
+          <Route path="/advanced/:username" element={<Advanced />} />
           <Route path='/addprofile/:username' element={<AddProfile />} />
           <Route path='/home/:username/:profile' element={<Home />} />
           <Route path="/home/search/:username/:profile" element={<Search />}></Route>

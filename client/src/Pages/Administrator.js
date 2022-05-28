@@ -80,7 +80,7 @@ const Administrator = () => {
   return (
     <div className='Admin'>
       <h1 onClick={() => { navigate("/") }} id="titulo">ADMINFLIX</h1>
-      <button className='btnAvanzado'>Opciones Avanzadas</button>
+      <button onClick={() => { navigate(`/advanced/${username}`) }} className='btnAvanzado'>Opciones Avanzadas</button>
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}

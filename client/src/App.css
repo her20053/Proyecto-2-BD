@@ -24,7 +24,8 @@ body {
 .AddProfile,
 .HomeP,
 .Search,
-.Admin {
+.Admin,
+.Advanced {
   position: absolute;
   margin: 0;
   padding: 0;
