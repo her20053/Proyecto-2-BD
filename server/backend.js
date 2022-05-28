@@ -446,7 +446,17 @@ app.post('/retraer_perfiles_de_usuario', (req, res) => {
 
 })
 
-
+app.post("/sendBusqueda", (req, res) => {
+    const id_usuario = req.body.id_usuario
+    const busqueda = req.body.busqueda
+    con.query(
+        `INSERT INTO busqueda VALUES(DEFAULT,?,?)`,
+        [id_usuario,busqueda],
+        function (error, resultado) {
+            console.log("Busqueda ingresada")
+        }
+    )
+})
 
 
 

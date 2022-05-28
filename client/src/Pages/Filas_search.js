@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import movieTrailer from 'movie-trailer';
 
+
 const Prueba2 = ({ title, isLargeRow }) => {
 
     let { username } = useParams();
@@ -21,6 +22,7 @@ const Prueba2 = ({ title, isLargeRow }) => {
     function ingresarpelicula() {
         let input_usuario = document.getElementById('search_input').value;
         retraerpeliculas1(input_usuario);
+        enviar_dato(input_usuario,username)
         console.log(input_usuario)
     }
 
@@ -37,6 +39,16 @@ const Prueba2 = ({ title, isLargeRow }) => {
                 haypelisf()
                 console.log(haypelis)
             })
+    }
+    const enviar_dato = async(dato_ingresado_parametro,usuario_p) =>{
+        const busqueda=dato_ingresado_parametro
+        const id_usuario=usuario_p
+        fetch('http://localhost:3001/sendBusqueda',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({id_usuario,busqueda})
+            }).then((response) => response.json())
     }
 
     // useEffect(() => {
