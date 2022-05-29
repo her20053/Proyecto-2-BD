@@ -171,7 +171,7 @@ app.post("/admin_agregar_usuario", (req, res) => {
     const id_admin = req.body.id_admin;
 
     con.connect(function (err) {
-    console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,NOW(),?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin])
+        console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,NOW(),?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin])
         console.log("Conectado")
 
         con.query(
@@ -345,6 +345,28 @@ app.post('/pruebaInsert', (req, res) => {
             console.log("Datos ingresados con exito")
         })
 })
+
+
+
+app.get('/retraerTodosPerfiles', (req, res) => {
+    console.log('\n[Operacion /retraerTodosPerfiles] + Se han enviado todos los perfiles retraidos.\n');
+    con.query(`select * from perfiles`,
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.get('/retraerTodasPeliculas', (req, res) => {
+    console.log('\n[Operacion /retraerTodasPeliculas] + Se han enviado todas las peliculas retraidas.\n');
+    con.query(`select * from peliculas`,
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+
+
+
 
 app.listen(PORT, () => {
     console.log(`App corriendo en http://localhost:${PORT}`)
