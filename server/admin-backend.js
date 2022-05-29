@@ -170,8 +170,14 @@ app.post("/admin_agregar_usuario", (req, res) => {
     const id = req.body.id;
     const id_admin = req.body.id_admin;
 
+    const id_suscripcion = req.body.id_susc
+    const id_planes = req.body.id_plan
+    let valido_hasta = (today.getFullYear() + 1) + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let fecha_inicio2 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     con.connect(function (err) {
-        console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,NOW(),?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin])
+        console.log(`INSERT INTO suscripciones VALUES(?,?,?,?,?)`, [id_suscripcion, id, id_planes, valido_hasta, fecha_inicio2])
+        console.log(`INSERT INTO usuarios VALUES(?,?,?,?,?,?,?,?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin])
         console.log("Conectado")
 
         con.query(
@@ -179,6 +185,60 @@ app.post("/admin_agregar_usuario", (req, res) => {
             `INSERT INTO usuarios VALUES(?,?,?,?,?,?,?,?)`, [id, nombre, correo, lugar1, clave, lugar2, ultimo_log, id_admin],
             function (error, resultado) {
                 console.log("Se ingreso el usuario con exito")
+            }
+        )
+
+         con.query(
+            // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
+            `INSERT INTO suscripciones VALUES(?,?,?,?,?)`, [id_suscripcion, id, id_planes, valido_hasta, fecha_inicio2],
+            function (error, resultado) {
+                console.log("Se ingreso el plan con exito")
+            }
+        )
+    })
+})
+
+app.post("/admin_agregar_actor", (req, res) => {
+
+    const id = req.body.id
+    const nombre = req.body.nombre_persona;
+    const edad = parseInt(req.body.edadAc)
+    const genero = req.body.generoAc
+    const id_admin = req.body.id_admin;
+
+    con.connect(function (err) {
+        console.log(`INSERT INTO actores VALUES(?,?,?,?,?)`, [id, nombre, genero, edad, id_admin])
+        console.log("Conectado")
+
+        con.query(
+            // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
+            `INSERT INTO actores VALUES(?,?,?,?,?)`, [id, nombre, genero, edad ,id_admin],
+            function (error, resultado) {
+                console.log("Se ingreso el actor con exito")
+            }
+        )
+    })
+})
+
+app.post("/admin_agregar_perfil", (req, res) => {
+
+    var today = new Date()
+    const id = req.body.id
+    const nombre = req.body.nombre_persona;
+    const id_usuario = req.body.id_usuario
+    const estatus = req.body.estatusP
+    const id_admin = req.body.id_admin
+    let fecha_inicio = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    con.connect(function (err) {
+        // console.log(`INSERT INTO actores VALUES(?,?,?,?,?)`, [id, nombre, genero, edad, id_admin])
+        console.log("Conectado")
+
+        con.query(
+            // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
+            `INSERT INTO perfiles VALUES(?,?,?,?,?,?)`, [id, id_usuario, nombre, fecha_inicio, estatus, id_admin],
+            function (error, resultado) {
+                console.log("Se ingreso el perfil con exito")
             }
         )
     })
@@ -205,6 +265,50 @@ app.post('/admin_eliminar_anunciante', (req, res) => {
         [id_anunciante],
         function (err, result) {
             console.log("Se elimino anunciante con exito")
+        }
+    )
+})
+
+app.post('/admin_eliminar_pelicula', (req, res) => {
+    const id_pelicula = req.body.id_pelicula
+    con.query(
+        `DELETE FROM memflixdatabase.peliculas an where an.id_pelicula=?`,
+        [id_pelicula],
+        function (err, result) {
+            console.log("Se elimino pelicula con exito")
+        }
+    )
+})
+
+app.post('/admin_eliminar_actor', (req, res) => {
+    const id_actor = req.body.id_actor
+    con.query(
+        `DELETE FROM memflixdatabase.actores an where an.id_actor=?`,
+        [id_actor],
+        function (err, result) {
+            console.log("Se elimino actor con exito")
+        }
+    )
+})
+
+app.post('/admin_eliminar_perfil', (req, res) => {
+    const id_perfil = req.body.id_perfil
+    con.query(
+        `DELETE FROM memflixdatabase.perfiles an where an.id_perfil=?`,
+        [id_perfil],
+        function (err, result) {
+            console.log("Se elimino perfil con exito")
+        }
+    )
+})
+
+app.post('/admin_eliminar_usuario', (req, res) => {
+    const id_usuario = req.body.id_usuario
+    con.query(
+        `DELETE FROM memflixdatabase.usuarios an where an.id_usuario=?`,
+        [id_usuario],
+        function (err, result) {
+            console.log("Se elimino usuario con exito")
         }
     )
 })
@@ -260,8 +364,66 @@ app.post('/admin_tools_modificar_usuario', (req, res) => {
 
 })
 
+app.post('/admin_tools_modificar_actor', (req, res) => {
+
+
+    const cuerpo = req.body
+    console.log(cuerpo.area)
+    if (cuerpo.area == 'nombre') {
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update actores set nombre = ?, id_administrador = ? WHERE id_actor = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.ida],
+                    function (error_agregar, resultado) {
+                        console.log("Actor modificada con exito")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+    if (cuerpo.area == 'genero') {
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update actores set genero = ?, id_administrador = ? WHERE id_actor = ?`,
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.ida],
+                    function (error_agregar, resultado) {
+                        console.log("Actor modificada con exito nombre")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+    if (cuerpo.area == 'edad') {
+        let contrasena = bcrypt.hashSync(cuerpo.nuevovalor, bcrypt.genSaltSync());
+        con.connect(
+            function (error, resultados) {
+                con.query(
+                    `update actores set edad = ?, id_administrador = ? WHERE id_actor = ?`,
+                    [contrasena, cuerpo.id_admin, cuerpo.ida],
+                    function (error_agregar, resultado) {
+                        console.log("Actor modificada con exito")
+                        console.log(resultados)
+                    }
+                )
+            }
+        )
+    }
+
+})
+
 app.get("/retraerTopGeneros", (req, res) => {
     con.query('SELECT g.nombre_genero,sum(p.duracion) as duracion from generos g join generos_pelicula gp on(g.id_genero=gp.id_genero) join peliculas p on(gp.id_pelicula=p.id_pelicula) join peliculas_vistas pv on(p.id_pelicula=pv.id_pelicula) GROUP BY g.nombre_genero ORDER BY duracion DESC LIMIT 7',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.get("/retraerBitacora", (req, res) => {
+    con.query('SELECT * FROM bitacora',
         (err, result) => {
             res.send(result);
         })
@@ -313,8 +475,8 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
         })
 })
 app.post('/actualizarstatus', (req, res) => {
-    const id_perfil = req.body.id_perfil
-    const id_administrador=req.body.id_perfil
+     const id_perfil = req.body.id_perfil
+    const id_administrador=req.body.id_admin
     con.query(`update perfiles set estatus = 0, id_administrador=? WHERE id_perfil = ?`,
         [id_administrador,id_perfil],
         function (error_agregar, resultado) {

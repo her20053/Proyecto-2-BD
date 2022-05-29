@@ -98,7 +98,7 @@ const Administrator = () => {
       }
 
       {
-        username === 'a002' ? <button id="btnBitacora" className='btnAgregarA'>Bitacora</button> : null
+        username === 'a002' ? <button id="btnBitacora" onClick={()=> navigate(`/Bitacora/${username}`)} className='btnAgregarA'>Bitacora</button> : null
       }
 
       {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} admin={username} />}

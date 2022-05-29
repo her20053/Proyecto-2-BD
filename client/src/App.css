@@ -36,6 +36,17 @@ body {
   overflow-y: hidden;
 }
 
+.BitacoraContainer{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  background: #111;
+  overflow-x: hidden;
+  color:#ffba08;
+}
+
 .Home {
   position: absolute;
   margin: 0;

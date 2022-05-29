@@ -11,6 +11,7 @@ import ErrorPage from './Pages/ErrorPage';
 import Search from "./Pages/search";
 import UpdatePlan from "./Pages/UpdatePlan";
 import Advanced from "./Pages/Advanced";
+import Bitacora from "./Pages/Bitacora";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/addprofile/:username' element={<AddProfile />} />
           <Route path='/home/:username/:profile' element={<Home />} />
           <Route path="/home/search/:username/:profile" element={<Search />}></Route>
+          <Route path="/Bitacora/:username" element={<Bitacora />}></Route>
           <Route path="/updateplan/:username" element={<UpdatePlan />} />
           <Route path="*" element={<ErrorPage />} />
 

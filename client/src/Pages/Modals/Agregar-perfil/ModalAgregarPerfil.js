@@ -6,27 +6,22 @@ import bcrypt from 'bcryptjs'
 function ModalAgregarUsario({ cerrarModal, admin }) {
 
     const [nombreusuario, setnombre] = useState('');
-    const [correou, setcorreo] = useState('');
-    const [lugarcreacionu,setlugarcreacion]=useState('');
-    const [clave, setclave] = useState('')
-    const [plan , setplan] = useState('')
+    const [estatus, setEstatus] = useState(0);
+    const [idU, setIDU] = useState('')
 
     const handleClick = () => {
-        let id = 'u' + Math.floor(Math.random() * 100000)
-        let id_susc = 's' + Math.floor(Math.random() * 100000)
+        let id = 'pe' + Math.floor(Math.random() * 100000)
         let nombre_persona = nombreusuario;
-        let correo = correou;
-        let lugar=lugarcreacionu
-        let contrasena = bcrypt.hashSync(clave, bcrypt.genSaltSync());
-        const id_admin = admin
-        const id_plan = plan
-        console.log(JSON.stringify({ id, nombre_persona, correo, lugar,contrasena, id_admin, id_susc, id_plan }))
-        fetch('http://localhost:3010/admin_agregar_usuario', {
+        let estatusP = estatus
+        let id_usuario = idU
+        let id_admin = admin
+        // console.log(JSON.stringify({ id, nombre_persona, correo, lugar,contrasena, id_admin, id_susc, id_plan }))
+        fetch('http://localhost:3010/admin_agregar_perfil', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, nombre_persona, correo, lugar,contrasena, id_admin, id_susc, id_plan }),
+        body: JSON.stringify({ id, id_usuario, nombre_persona, estatusP, id_admin }),
       })
         .then(response => {
             console.log('Se ingreso un usuario correctamente')
@@ -48,12 +43,10 @@ function ModalAgregarUsario({ cerrarModal, admin }) {
                         onClick={() => cerrarModal(false)}>Cerrar</button>
                 </div>
                 <div className="area-info-modal">
-                    <h1>Agregar nuevo usuario</h1>
+                    <h1>Agregar nuevo perfil</h1>
+                    <input type="text" onChange={(e) => setIDU(e.target.value)} placeholder="Id usuario" />
                     <input type="text" onChange={(e) => setnombre(e.target.value)} placeholder="Nombre" />
-                    <input type="text" onChange={(e) => setcorreo(e.target.value)} placeholder="Correo" />
-                    <input type="password" onChange={(e)=>setclave(e.target.value)} placeholder="contraseña"/>
-                    <input type="text" onChange={(e) => setlugarcreacion(e.target.value)} placeholder="Lugar de Creacion" />
-                    <input type="text" onChange={(e)=> setplan(e.target.value)} placeholder="Suscripcion"/>
+                    <input type="text" onChange={(e)=>setEstatus(e.target.value)} placeholder="Estatus"/>
 
                 </div>
                 <div className="area-enviar-modal">
