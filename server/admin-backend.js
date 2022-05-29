@@ -46,7 +46,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set titulo = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                     }
@@ -59,7 +59,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set resumen = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -73,7 +73,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set url = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -87,7 +87,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set duracion = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -101,7 +101,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set fecha_estreno = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -115,7 +115,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set rating = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor,cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -129,7 +129,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set poster_path = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -143,7 +143,7 @@ app.post('/admin_tools_modificar_pelicula', (req, res) => {
             function (error, resultados) {
                 con.query(
                     `update peliculas set backdrop_path = ?, id_administrador=? WHERE id_pelicula = ?`,
-                    [cuerpo.nuevovalor, cuerpo.id_admin ,cuerpo.idp],
+                    [cuerpo.nuevovalor, cuerpo.id_admin, cuerpo.idp],
                     function (error_agregar, resultado) {
                         console.log("Pelicula modificada con exito")
                         console.log(resultados)
@@ -475,19 +475,21 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
         })
 })
 app.post('/actualizarstatus', (req, res) => {
+
      const id_perfil = req.body.id_perfil
     const id_administrador=req.body.id_admin
+
     con.query(`update perfiles set estatus = 0, id_administrador=? WHERE id_perfil = ?`,
-        [id_administrador,id_perfil],
+        [id_administrador, id_perfil],
         function (error_agregar, resultado) {
             console.log("estatus modificado con exito")
         })
 })
 app.post('/actualizarstatus1', (req, res) => {
     const id_perfil = req.body.id_perfil
-    const id_administrador=req.body.id_admin
+    const id_administrador = req.body.id_admin
     con.query(`update perfiles set estatus = 1, id_administrador=? WHERE id_perfil = ?`,
-        [id_administrador,id_perfil],
+        [id_administrador, id_perfil],
         function (error_agregar, resultado) {
             console.log("estatus modificado con exito")
         })
@@ -524,6 +526,25 @@ app.get('/retraerTodasPeliculas', (req, res) => {
         (err, result) => {
             res.send(result);
         })
+})
+
+app.post('/insertarSimulacionVisitas', (req, res) => {
+    // insert into peliculas_vistas values('pe57487', 'pe0552', cast('2022-04-21' as date), cast('2022-05-18' as date), 15, 13)
+    const per = req.body.per
+    const pel = req.body.pel
+    const fei = req.body.fei
+    const fef = req.body.fef
+    const hin = req.body.hin
+    const hfn = req.body.hfn
+    const ido = req.body.ido
+
+    con.query(`insert into peliculas_vistas values(?,?,cast(? as date),cast(? as date),?,?)`, [per, pel, fei, fef, hin, hfn],
+        function (error_agregar, resultado) {
+            console.log("ID: " + ido + " [ Nueva Operacion /insertarSimulacionVisitas ] + Se ha agregado dato con exito")
+            console.log([per, pel, fei, fef, hin, hfn]);
+            res.send('Agregado')
+        })
+
 })
 
 

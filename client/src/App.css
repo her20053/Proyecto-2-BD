@@ -1054,12 +1054,13 @@ button#raise {
   box-shadow: 0 0.5em 0.5em -0.4em white;
   transform: translateY(-0.25em);
 }
-.cantidad_cuentas{
+
+.cantidad_cuentas {
   text-align: center;
   font-size: 30px;
 }
 
-.btnAgregarA{
+.btnAgregarA {
   position: absolute;
   right: 15rem;
   top: 1.5rem;
@@ -1097,26 +1098,36 @@ button#raise {
   padding: 14px 10px;
 }
 
-.btnAdminAgregado{
-    position: relative;
-    left: 40%;
-      bottom: 0;
-      border: 0;
-      background: #ffba08;
-      margin: 20px auto;
-      text-align: center;
-      font-weight: bold;
-      font-size: 15px;
-      border: 3px solid #ffba08;
-      outline: none;
-      color: white;
-      border-radius: 7px;
-      transition: 0.25px;
-      cursor: pointer;
-      padding: 14px 10px;
+.btnAdminAgregado {
+  position: relative;
+  left: 40%;
+  bottom: 0;
+  border: 0;
+  background: #ffba08;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  border: 3px solid #ffba08;
+  outline: none;
+  color: white;
+  border-radius: 7px;
+  transition: 0.25px;
+  cursor: pointer;
+  padding: 14px 10px;
 }
 
-#btnBitacora{
+#btnBitacora {
   position: absolute;
   right: 410px;
+}
+
+.area_selecciones_simulacion {
+  display: flex;
+  flex-direction: column;
+}
+
+.loader_request_visualizaciones {
+  align-self: center;
+  margin: 15px;
 }
