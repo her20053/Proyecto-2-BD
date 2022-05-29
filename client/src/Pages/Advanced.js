@@ -8,6 +8,7 @@ const Advanced = () => {
   return (
     <div className="Advanced">
       <h1 onClick={() => { navigate("/") }} id="titulo">ADMINFLIX</h1>
+      <button className='btnAvanzado'>Simulador Vistas</button>
       <div className='contenido-admin'>
         <div className='caja-opciones-admin'>
           <h1>Herramientas de administrador</h1>

@@ -1104,3 +1104,8 @@ button#raise {
       cursor: pointer;
       padding: 14px 10px;
 }
+
+#btnBitacora{
+  position: absolute;
+  right: 410px;
+}

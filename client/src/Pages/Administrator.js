@@ -97,6 +97,10 @@ const Administrator = () => {
         username === 'a002' ? <button onClick={() => setOpened(true)} className='btnAgregarA'>Agregar Admin</button> : null
       }
 
+      {
+        username === 'a002' ? <button id="btnBitacora" className='btnAgregarA'>Bitacora</button> : null
+      }
+
       {modal_map && <ModalAgregarPelicula cerrarModal={setmodal_map} admin={username} />}
       {modal_mmp && <ModalModificarPelicula cerrarModal={setmodal_mmp} admin={username} />}
       {modal_mcp && <ModalCorregirPelicula cerrarModal={setmodal_mcp} admin={username} />}
