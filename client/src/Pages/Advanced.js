@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 // import { Modal, Button, Group } from '@mantine/core';
 
@@ -13,8 +13,9 @@ import ModalModificarActor from './Modals/modificar-actor-folder/modificarActor'
 import TopBusquedas from './Modals/top-busquedas-folder/topBusquedas'
 import TopAdmins from './Modals/top-admins-folder/topAdmins'
 import TopTerminar from './Modals/top-sterminar-folder/topTerminar'
+import Top5MasVistos from './Modals/Top-5-Contenido-Visto/Top5MasVistos'
 
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { NumberInput, Modal, Text, Button, Loader, Input } from '@mantine/core';
 
@@ -42,7 +43,8 @@ const Advanced = () => {
   const [modal_tbu, setmodal_tbu] = useState(false);
   const [modal_tad, setmodal_tad] = useState(false);
   const [modal_tst, setmodal_tst] = useState(false);
-  
+  const [modal_t5v, setModal_t5v] = useState(false);
+
   let { username } = useParams();
 
   const [modalSimuladorVistas, setModalSimuladorVistas] = useState(false);
@@ -170,6 +172,7 @@ const Advanced = () => {
       {modal_tad && <TopAdmins cerrarModal={setmodal_tad} inicial={fechaInicial} final={fechaFinal} />}
       {modal_tst && <TopTerminar cerrarModal={setmodal_tst} inicial={fechaInicial} final={fechaFinal} />}
 
+      <Top5MasVistos opened={modal_t5v} setOpened={setModal_t5v} />
 
       <Modal
         transition="rotate-left"
@@ -218,17 +221,17 @@ const Advanced = () => {
       >
         <Input onInput={(e) => setFechaInicial(e.target.value)} variant="default" placeholder="Fecha Inicial" />
         <Input onInput={(e) => setfechaFinal(e.target.value)} variant="default" placeholder="Fecha Final" type='text' />
-         <button onClick={() => handleClick()} className="btnAdminAgregado">Continuar</button>
+        <button onClick={() => handleClick()} className="btnAdminAgregado">Continuar</button>
       </Modal>
 
-       <Modal
+      <Modal
         opened={opened1}
         onClose={() => setOpened(false)}
         title="Elija el rango de fechas!"
       >
         <Input onInput={(e) => setFechaInicial(e.target.value)} variant="default" placeholder="Fecha Inicial" />
         <Input onInput={(e) => setfechaFinal(e.target.value)} variant="default" placeholder="Fecha Final" type='text' />
-         <button onClick={() => handleClick1()} className="btnAdminAgregado">Continuar</button>
+        <button onClick={() => handleClick1()} className="btnAdminAgregado">Continuar</button>
       </Modal>
 
 
@@ -251,7 +254,7 @@ const Advanced = () => {
         </div>
         <div className='caja-opciones-admin'>
           <h1>Reporteria avanzada</h1>
-          <button id="raise" >Top 5 de contenido mas visto</button>
+          <button id="raise" onClick={() => { setModal_t5v(true) }}>Top 5 de contenido mas visto</button>
           <button id="raise" onClick={() => { setmodal_tbu(true); }} >Top 10 de los terminos de busqueda</button>
           <button id="raise" onClick={() => { setOpened(true); }} >Top 5 de adiministradores que mas modificaciones realizan</button>
           <button id="raise" onClick={() => { setOpened1(true); }} >Top 20 de peliculas que comenzaron a verse pero que no se terminan</button>
