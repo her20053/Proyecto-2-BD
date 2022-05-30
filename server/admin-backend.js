@@ -422,6 +422,29 @@ app.get("/retraerTopGeneros", (req, res) => {
         })
 })
 
+app.get("/retraerBusquedas", (req, res) => {
+    con.query('SELECT * FROM topBusquedas',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.post("/retraerAdmins", (req, res) => {
+
+    con.query('Select * from topAdmins where fecha_modificacion between ? and ? limit 5', [req.body.fInicial, req.body.fFinal],
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.post("/retraerTerminar", (req, res) => {
+    console.log('select * from topSinTerminar where CAST(? AS DATE) - CAST(? AS DATE) >= 20 limit 20', [ req.body.fFinal, req.body.fInicial])
+    con.query('select * from topSinTerminar where CAST(? AS DATE) - CAST(? AS DATE) >= 20 limit 20', [ req.body.fFinal, req.body.fInicial],
+        (err, result) => {
+            res.send(result);
+        })
+})
+
 app.get("/retraerBitacora", (req, res) => {
     con.query('SELECT * FROM bitacora',
         (err, result) => {
