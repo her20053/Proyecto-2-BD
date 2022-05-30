@@ -68,7 +68,7 @@ const Top5MasVistos = ({ opened, setOpened }) => {
 			<tr key={Math.floor(Math.random() * 10000)}>
 				<td>{element.hora_inicial}</td>
 				<td>{element.id_pelicula}</td>
-				<td>{element.fecha_inicial}</td>
+				<td>{element.fecha_inicial.split('T')[0]}</td>
 				<td>{element.cuenta}</td>
 			</tr>
 		))
