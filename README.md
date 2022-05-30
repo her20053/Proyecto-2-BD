@@ -36,13 +36,13 @@ hostear nuestra base de datos y poder accederla desde cualquier computador.
 # Credenciales para el uso del proyecto
 
 ## Credenciales administradores
-usuario: coyli@gmail.com
-contrasena: 12345678
+- usuario: coyli@gmail.com
+- contrasena: 12345678
 
 ## Credenciales usuario
 
-usuario: a@gmail.com
-contrasena: 12345678
+- usuario: a@gmail.com
+- contrasena: 12345678
 
 # Instalar modulos del cliente  y correr app
 
@@ -77,6 +77,6 @@ $ npm run devStartAdmin
 ```
 
 # Creditos
-Javier Mombiela javim7
-Jose Hernandez her20053
-Pablo Gonzalez IPablo271
+- Javier Mombiela javim7
+- Jose Hernandez her20053
+- Pablo Gonzalez IPablo271
