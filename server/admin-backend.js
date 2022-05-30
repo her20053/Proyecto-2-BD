@@ -188,7 +188,7 @@ app.post("/admin_agregar_usuario", (req, res) => {
             }
         )
 
-         con.query(
+        con.query(
             // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
             `INSERT INTO suscripciones VALUES(?,?,?,?,?)`, [id_suscripcion, id, id_planes, valido_hasta, fecha_inicio2],
             function (error, resultado) {
@@ -212,7 +212,7 @@ app.post("/admin_agregar_actor", (req, res) => {
 
         con.query(
             // 'INSERT INTO pruebausuarios VALUES("PERRO","123")',
-            `INSERT INTO actores VALUES(?,?,?,?,?)`, [id, nombre, genero, edad ,id_admin],
+            `INSERT INTO actores VALUES(?,?,?,?,?)`, [id, nombre, genero, edad, id_admin],
             function (error, resultado) {
                 console.log("Se ingreso el actor con exito")
             }
@@ -422,6 +422,40 @@ app.get("/retraerTopGeneros", (req, res) => {
         })
 })
 
+app.get("/retraerBusquedas", (req, res) => {
+    con.query('SELECT * FROM topBusquedas',
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.post("/retraerAdmins", (req, res) => {
+
+    con.query('Select * from topAdmins where fecha_modificacion between ? and ? limit 5', [req.body.fInicial, req.body.fFinal],
+        (err, result) => {
+            res.send(result);
+        })
+})
+
+app.post("/retraerTop5MasVistos", (req, res) => {
+
+    con.query(
+        `select * from topHoras WHERE fecha_inicial between cast(? as date) and cast(? as date)`
+        , [req.body.fFinal, req.body.fInicial],
+        (err, result) => {
+            console.log(result);
+            res.send(result);
+        })
+})
+
+app.post("/retraerTerminar", (req, res) => {
+    console.log('select * from topSinTerminar where CAST(? AS DATE) - CAST(? AS DATE) >= 20 limit 20', [req.body.fFinal, req.body.fInicial])
+    con.query('select * from topSinTerminar where CAST(? AS DATE) - CAST(? AS DATE) >= 20 limit 20', [req.body.fFinal, req.body.fInicial],
+        (err, result) => {
+            res.send(result);
+        })
+})
+
 app.get("/retraerBitacora", (req, res) => {
     con.query('SELECT * FROM bitacora',
         (err, result) => {
@@ -476,8 +510,8 @@ app.get("/retraerCuentaAvanzada", (req, res) => {
 })
 app.post('/actualizarstatus', (req, res) => {
 
-     const id_perfil = req.body.id_perfil
-    const id_administrador=req.body.id_admin
+    const id_perfil = req.body.id_perfil
+    const id_administrador = req.body.id_admin
 
     con.query(`update perfiles set estatus = 0, id_administrador=? WHERE id_perfil = ?`,
         [id_administrador, id_perfil],
