@@ -113,7 +113,7 @@ const Prueba2 = ({ title, isLargeRow }) => {
             <h1 className='tituloFilas'>{title}</h1>
             <div className="filas_posters">
                 {peliculas.map(pelicula => (
-                    <div>
+                    <div className='posters'>
                         <img
                             key={pelicula.id_pelicula}
                             onClick={() => handleClick(pelicula)}
