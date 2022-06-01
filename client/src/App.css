@@ -733,11 +733,25 @@ p {
 }
 
 .fila {
+  /* margin-top: 200px; */
   margin-left: 20px;
   color: white;
 }
 
+.fila::-webkit-scrollbar {
+  display: none;
+}
+
+#filaBusqueda::-webkit-scrollbar {
+  display: none;
+}
+
+#filaBusquda{
+  margin-top: 200px;
+}
+
 .tituloFilas {
+  position: relative;
   margin-left: 22px;
 }
 

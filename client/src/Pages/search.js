@@ -5,8 +5,8 @@ const Search =()=>{
     return(
         <div className="Search">
             <Nav/>
-            <div className='fila'>
-                <Filas title="Busqueda" isLargeRow />
+            <div className='fila' id='filaBusquda'>
+                <Filas title="Search" isLargeRow />
             </div>
         </div>
         
